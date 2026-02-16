@@ -28,8 +28,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'talker_executable = Challenge1_Manchester.publisher:main',
-            'receiver_executable = Challenge1_Manchester.subscriber:main'
+            'signal_generator_executable = Challenge1_Manchester.signal_generator:main',
+            'process_executable = Challenge1_Manchester.process:main'
         ],
     },
 )
