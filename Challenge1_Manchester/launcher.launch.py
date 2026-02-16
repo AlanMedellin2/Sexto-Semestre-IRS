@@ -5,10 +5,10 @@ def generate_launch_description():
     return LaunchDescription([
         Node(
             package = 'Challenge1_Manchester',
-            executable = 'talker_executable',
+            executable = 'signal_generator_executable',
             output = 'screen'),
         Node(
             package = 'Challenge1_Manchester',
-            executable = 'receiver_executable',
+            executable = 'process_executable',
             output = 'screen')
     ])
