@@ -24,7 +24,7 @@ class ControleNode(Node):               #definimos la clase
     #Subscriber init
     self.init_subscriber = self.create_subscription(
         Init,
-        '/init_system',
+        'init_system',
         self.init_callback,
         10
     )
