@@ -13,8 +13,8 @@ class RobotService(Node):
         super().__init__('initaite_motor_service') #Nombre del nodo
 
         #Publisher
-        self.service = self.create_service(Initiate, '/init', self.init_callback)
-        self.init_publisher = self.create_publisher(Init, '/init_system',10)
+        self.service = self.create_service(Initiate, 'init', self.init_callback)
+        self.init_publisher = self.create_publisher(Init, 'init_system',10)
         self.timer = self.create_timer(0.5, self.timer_callback)
         self.msg = Init()
 
