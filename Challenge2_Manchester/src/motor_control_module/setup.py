@@ -30,7 +30,10 @@ setup(
             'dc_motor = motor_control_module.dc_motor:main',
             'set_point = motor_control_module.set_point:main',
             'controller = motor_control_module.controller:main',
-            'server = motor_control_module.server:main'
+            'server = motor_control_module.server:main',
+            'set_point = motor_control.set_point:main',
+            'controlador = motor_control.controlador:main'
+            
         ],
     },
 )
