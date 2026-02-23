@@ -3,6 +3,7 @@ import rclpy
 from rclpy.node import Node
 import numpy as np
 from std_msgs.msg import Float32
+from custom_interfaces.msg import Init
 
 #Class Definition
 class SetPointPublisher(Node):
@@ -12,11 +13,21 @@ class SetPointPublisher(Node):
         # Retrieve sine wave parameters
         self.amplitude = 2.0
         self.omega  = 1.0
+        self.timer_period = 0.2 #seconds
 
         #Create a publisher and timer for the signal
-        self.signal_publisher = self.create_publisher(Float32, 'set_point', 10)
-        timer_period = 0.1 #seconds
-        self.timer = self.create_timer(timer_period, self.timer_cb)
+        self.signal_publisher = self.create_publisher(Float32, 'set_point', 10)    ## CHECK FOR THE NAME OF THE TOPIC
+        self.timer = self.create_timer(self.timer_period, self.timer_cb)
+
+        #Subscriber for Init system
+        self.init_subscriber = self.create_subscription(
+            Init,
+            '/init_system',
+            self.init_callback,
+            10
+        )
+
+        self.active = False
         
         #Create a messages and variables to be used
         self.signal_msg = Float32()
@@ -24,14 +35,22 @@ class SetPointPublisher(Node):
 
         self.get_logger().info("SetPoint Node Started \U0001F680")
 
+    def init_callback(self, msg):
+        if msg.info.data == 'resume':
+            self.active = True
+        else:
+            self.active = False
+
     # Timer Callback: Generate and Publish Sine Wave Signal
     def timer_cb(self):
-        #Calculate elapsed time
-        elapsed_time = (self.get_clock().now() - self.start_time).nanoseconds/1e9
-        # Generate sine wave signal
-        self.signal_msg.data = self.amplitude * np.sin(self.omega * elapsed_time)
-        # Publish the signal
-        self.signal_publisher.publish(self.signal_msg)
+        if (self.active == True):
+            #Calculate elapsed time
+            elapsed_time = (self.get_clock().now() - self.start_time).nanoseconds/1e9
+            # Generate sine wave signal
+            self.signal_msg.data = self.amplitude * np.sin(self.omega * elapsed_time)
+            # Publish the signal
+            self.signal_publisher.publish(self.signal_msg)
+    
 
 #Main
 def main(args=None):
