@@ -7,6 +7,13 @@ def generate_launch_description():
                        executable='dc_motor',
                        emulate_tty=True,
                        output='screen',
+                       parameters=[{
+                           'sample_time':0.02,
+                           'sys_gain_K':1.78,
+                           'sys_tau_T':0.5,
+                           'initial_conditions':0.0,
+                        }
+                        ]
                        )
     
     sp_node = Node(name="sp_gen",
