@@ -2,17 +2,28 @@ from launch import LaunchDescription
 from launch_ros.actions import Node
 
 def generate_launch_description():
-    return LaunchDescription([
-        Node(
-            package = 'motor_control_module',
-            executable = 'dc_motor',
-            output = 'screen'),
-        Node(
-            package = 'motor_control_module',
-            executable = 'set_point',
-            output = 'screen'),
-        Node(
-            package = 'motor_control_module',
-            executable = 'server',
-            output = 'screen')
-    ])
+    motor_node = Node(name="motor_sys",
+                       package='motor_control',
+                       executable='dc_motor',
+                       emulate_tty=True,
+                       output='screen',
+                       )
+    
+    sp_node = Node(name="sp_gen",
+                       package='motor_control',
+                       executable='set_point',
+                       emulate_tty=True,
+                       output='screen',
+                       )
+    
+    control_node= Node(name="control_node",
+                        package ='motor_control',
+                        executable ='controlador',
+                        emulate_tty=True,
+                        output='screen',
+                        parameters=[{'kp':2}],
+                        )
+    
+    l_d = LaunchDescription([motor_node, sp_node, control_node])
+
+    return l_d
