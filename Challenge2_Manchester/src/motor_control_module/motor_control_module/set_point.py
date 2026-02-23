@@ -22,7 +22,7 @@ class SetPointPublisher(Node):
         #Subscriber for Init system
         self.init_subscriber = self.create_subscription(
             Init,
-            '/init_system',
+            'init_system',
             self.init_callback,
             10
         )
