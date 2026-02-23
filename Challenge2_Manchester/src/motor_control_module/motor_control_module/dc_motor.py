@@ -15,7 +15,7 @@ class DCMotor(Node):
         # System sample time in seconds
         self.declare_parameter('sample_time', 0.02)
         # System gain K
-        self.declare_parameter('sys_gain_K', 1.75)
+        self.declare_parameter('sys_gain_K', 1.75) #1.75
         # System time constant Tau
         self.declare_parameter('sys_tau_T', 0.5)
         # System initial conditions
@@ -64,18 +64,18 @@ class DCMotor(Node):
         
     #Timer Callback
     def timer_cb(self):  
+        
+        #DC Motor Simulation
+        #DC Motor Equation 𝑦[𝑘+1] = 𝑦[𝑘] + ((−1/𝜏) 𝑦[𝑘] + (𝐾/𝜏) 𝑢[𝑘]) 𝑇_𝑠
+        self.output_y += (-1.0/self.param_T * self.output_y + self.param_K/self.param_T * self.input_u) * self.sample_time 
+        #Publish the result
+        self.motor_output_msg.data = self.output_y
         if (self.active == True):  
-            #DC Motor Simulation
-            #DC Motor Equation 𝑦[𝑘+1] = 𝑦[𝑘] + ((−1/𝜏) 𝑦[𝑘] + (𝐾/𝜏) 𝑢[𝑘]) 𝑇_𝑠
-            self.output_y += (-1.0/self.param_T * self.output_y + self.param_K/self.param_T * self.input_u) * self.sample_time 
-            #Publish the result
-            self.motor_output_msg.data = self.output_y
             self.motor_speed_pub.publish(self.motor_output_msg)
 
     #Subscriber Callback
     def input_callback(self, input_sgn):
-        if (self.active == True):
-            self.input_u = input_sgn.data
+        self.input_u = input_sgn.data
 
 
     def parameters_callback(self, params):
