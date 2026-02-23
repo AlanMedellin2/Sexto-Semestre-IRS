@@ -94,6 +94,27 @@ def generate_launch_description():
                           namespace="group3",
                           parameters=[{'kp': 2.0}],
                           )
+    server_node_1 = Node(name="server_node_1",
+                          package='motor_control',
+                          executable='server',
+                          emulate_tty=True,
+                          output='screen',
+                          namespace="group1",
+                        )
+    server_node_2 = Node(name="server_node_2",
+                          package='motor_control',
+                          executable='server',
+                          emulate_tty=True,
+                          output='screen',
+                          namespace="group2",
+                        )
+    server_node_3 = Node(name="server_node_3",
+                          package='motor_control',
+                          executable='server',
+                          emulate_tty=True,
+                          output='screen',
+                          namespace="group3",
+                        )
 
     l_d = LaunchDescription([
         motor_node_1, sp_node_1, control_node_1,
