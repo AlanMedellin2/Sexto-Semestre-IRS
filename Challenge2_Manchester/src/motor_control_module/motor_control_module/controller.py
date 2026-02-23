@@ -1,12 +1,14 @@
 import rclpy                #para programar en python
 from rclpy.node import Node #clases nodo
-from std_msgs.msg import Float32           
+from std_msgs.msg import Float32 
+from rcl_interfaces.msg import SetParametersResult
+        
 
 class ControleNode(Node):               #definimos la clase
    def __init__(self):
     super().__init__('control_node')         #'nombre de nodo'
 
-    self.declare_parameter('kp', 1) #parámetro de ganancia
+    self.declare_parameter('kp', 1.0) #parámetro de ganancia
     self.kp = self.get_parameter('kp'). value
 
     self.setp = 0
@@ -19,6 +21,9 @@ class ControleNode(Node):               #definimos la clase
 
     self.timer = self.create_timer(timer_period, self.timer_cb)     #cada 0.5 segundos se llama al callback
     self.i= 0
+
+    #Parameter Callback
+    self.add_on_set_parameters_callback(self.parameters_callback)
 
    def timer_cb(self):
     msg = Float32()
@@ -35,6 +40,20 @@ class ControleNode(Node):               #definimos la clase
 
    def y_callback(self, msg):
     self.y = msg.data
+
+   def parameters_callback(self, params):
+        for param in params:
+            #system gain parameter check
+            if param.name == "kp":
+                #check if it is negative
+                if (param.value < 0.0):
+                    self.get_logger().warn("Error en kp, no puede ser negativo")
+                    return SetParametersResult(successful=False, reason="kp no puede ser negativo")
+                else:
+                    self.kp = param.value  # Update internal variable
+                    self.get_logger().info(f"se actualizo el valor de kp a:  {self.kp}")
+
+        return SetParametersResult(successful=True)
 
 
 def main(args=None):
