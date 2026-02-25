@@ -85,7 +85,7 @@ void setup() {
     &subscriber,                //definimos subscriber
     &node,
     ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float32),
-    "micro_ros_sub"));    //tópico al que nos vamos a suscribir
+    "/cmd_pwm"));    //tópico al que nos vamos a suscribir
 
   // create executor
   RCCHECK(rclc_executor_init(&executor, &support.context, 1, &allocator));
