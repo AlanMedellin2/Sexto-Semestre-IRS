@@ -75,7 +75,7 @@ bool create_entities()
     &publisher,
     &node,
     ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
-    "micro_ros_counter"));
+    "/cmd_pwm"));
 
     // create timer,
   const unsigned int timer_timeout = 1000;
