@@ -119,7 +119,8 @@ def generate_launch_description():
     l_d = LaunchDescription([
         motor_node_1, sp_node_1, control_node_1,
         motor_node_2, sp_node_2, control_node_2,
-        motor_node_3, sp_node_3, control_node_3,
+        motor_node_3, sp_node_3, control_node_3, 
+        server_node_1, server_node_2, server_node_3,
     ])
   
     return l_d
