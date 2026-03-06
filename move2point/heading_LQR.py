@@ -54,32 +54,26 @@ class TurnLQRSecondOrder(Node):
 
         self.timer = self.create_timer(DT, self.control_loop)
 
-        self.yaw = 0.0
+        #PARA LOS ANGULOS
         self.omega = 0.0
         self.theta = 0.0
 
+        #POSICIONES
         self.goal_x = None
         self.goal_y = None
         self.pose_x = 0.0
         self.pose_y = 0.0
 
+        self.kp_atrac = 2.0
+
         self.omega_cmd = 0.0
+
+        self.FR_x = 0
+        self.FR_y = 0
 
         self.get_logger().info("LQR 2° orden estable listo.")
 
     # ─────────────────────────────
-
-    def cb_odom(self, msg: Odometry):
-        self.x = msg.pose.pose.position.x
-        self.y = msg.pose.pose.position.y
-
-        q = msg.pose.pose.orientation
-        self.yaw = math.atan2(
-            2.0 * (q.w * q.z + q.x * q.y),
-            1.0 - 2.0 * (q.y * q.y + q.z * q.z)
-        )
-
-        self.omega = msg.twist.twist.angular.z
 
     def cb_goal(self, msg: PointStamped):
         self.goal_x = msg.point.x
@@ -102,8 +96,31 @@ class TurnLQRSecondOrder(Node):
     # ─────────────────────────────
 
     def control_loop(self):
+
+         # --- 1. NO HACE NADA SI NO HA LLEGADO UN PUNTO ---
         if self.goal_x is None:
             return
+        
+        # --- 2. CALUCLAR DISTANCIA Y EVALUAR ---
+        dist = math.hypot(self.goal_x-self.pose_x,self.goal_y-self.pose_y)
+        if dist<0.5:
+            self.get_logger().info("¡Meta alcanzada!")
+            cmd = Twist()
+            self.pub_cmd.publish(cmd)
+            self.goal_x = None 
+            self.goal_y = None
+            cmd.angular.z = 0.0
+            cmd.linear.x = 0.0
+            return
+            
+        # --- 3. CAMPOS POTENCIALES (FUERZA ATRACTIVA) ---
+        FA_x = self.kp_atrac*(self.goal_x-self.pose_x)
+        FA_y = self.kp_atrac*(self.goal_y-self.pose_y)
+
+
+        # --- 4. FUERZA TOTAL ---
+        Ftot_x = FA_x + self.FR_x
+        Ftot_y = FA_y + self.FR_y
 
         dx = self.goal_x - self.pose_x
         dy = self.goal_y - self.pose_y
@@ -123,21 +140,24 @@ class TurnLQRSecondOrder(Node):
         self.omega = np.clip(self.omega, -2.8, 2.8)
 
         # --- 6. MODULACIÓN DE VELOCIDAD LINEAL ---
-        #v = MAX_ANG_VEL * max(0.0, math.cos(error))
+        v = MAX_ANG_VEL * max(0.0, math.cos(error))
 
         # --- PUBLICAR COMANDOS ---
         cmd = Twist()
-        #cmd.linear.x = float(v)
         cmd.angular.z = float(self.omega)
         
+        alineado = abs(error) < ANGLE_TOL
         # Condición de parada
         self.get_logger().info(f"error: {error:.4f}")
-        if abs(error) < ANGLE_TOL:
-            cmd.angular.z = 0.0
-            self.goal_x = None
-            self.goal_y = None
-            self.omega = 0.0
+
+        if alineado:
             self.get_logger().info("Alineado correctamente.")
+            cmd.angular.z = 0.0
+            cmd.linear.x = float(v)
+        
+        else:
+            cmd.angular.z = float(self.omega)
+            cmd.linear.x = 0.0
 
         self.pub_cmd.publish(cmd)
 
