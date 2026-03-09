@@ -8,14 +8,14 @@ from rcl_interfaces.msg import SetParametersResult
 class ControleNode(Node):
     def __init__(self):
         super().__init__('control_node')
-        self.declare_parameter('kp', 1.0)
+        self.declare_parameter('kp', 0.4)
         self.kp = self.get_parameter('kp').value
-        self.declare_parameter('ki', 1.0)
+        self.declare_parameter('ki', 1.4)
         self.ki = self.get_parameter('ki').value
-        self.declare_parameter('kd', 1.0)
+        self.declare_parameter('kd', 0.0)
         self.kd = self.get_parameter('kd').value
         self.dt = 0.01
-        self.declare_parameter('set_point', 5.0)  # rad/s deseadas
+        self.declare_parameter('set_point', 2.5)  # rad/s deseadas
         self.setp = self.get_parameter('set_point').value
         self.y = 0.0
         self.anterior_error = 0.0
