@@ -26,7 +26,7 @@
 // =======================
 // ====== MOTOR ==========
 // =======================
-#define PPR        44.5f   // pulsos por revolución del motor
+#define PPR        22.5f   // pulsos por revolución del motor
 #define GEAR_RATIO 45.0f   // reducción
 #define TS         0.01f    // mismo periodo que el MPC
 
@@ -35,10 +35,16 @@
 // =======================
 volatile long encoder_count = 0;
 volatile float target_duty = 0.0f;
+float current_duty = 0.0f;
 
-void IRAM_ATTR encoder_isr() {
-  encoder_count++;
+// ISR modo 4x
+void IRAM_ATTR encoder_isr_A() {
+  if (digitalRead(ENC_B))
+    encoder_count++;
+  else
+    encoder_count--;
 }
+
 
 // =======================
 // ===== MICRO-ROS =======
@@ -88,17 +94,35 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
   RCLC_UNUSED(last_call_time);
   if (timer == NULL) return;
 
+  /*
+
+  // Suavizado: acerca current_duty hacia target_duty poco a poco
+  float diff = target_duty - current_duty;
+  if (abs(diff) > 0.001f) {
+    current_duty += diff / 10.0f;  // 10 pasos para llegar
+    // Evitar overshoot
+    if ((diff > 0 && current_duty > target_duty) ||
+        (diff < 0 && current_duty < target_duty)) {
+      current_duty = target_duty;
+    }
+  } else {
+    current_duty = target_duty;
+  }*/
+
+
+  float duty = target_duty;
+  
   // Dirección
-  if (target_duty < 0.0f) {
+  if (duty < 0.0f) {
     digitalWrite(IN1_PIN, HIGH);
     digitalWrite(IN2_PIN, LOW);
-    target_duty *= -1.0;
+    duty *= -1.0;
   } else {
     digitalWrite(IN1_PIN, LOW);
     digitalWrite(IN2_PIN, HIGH);
   }
 
-  uint32_t pwm_value = (uint32_t)((pow(2, PWM_RES) - 1) * target_duty);
+  uint32_t pwm_value = (uint32_t)((pow(2, PWM_RES) - 1) * duty);
   ledcWrite(PWM_CHNL, pwm_value);
 
   // Calcular velocidad del eje de salida
@@ -108,11 +132,12 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
   prev_count = current_count;
 
   float speed_rps_motor  = (float)delta / (PPR * TS);
-  float speed_rps_output = speed_rps_motor / GEAR_RATIO;
+  float speed_rps_output = speed_rps_motor/GEAR_RATIO;
   float speed_raw        = speed_rps_output * 2.0f * M_PI;
 
+
   // Filtro promedio móvil
-  #define FILTER_SIZE 5
+  #define FILTER_SIZE 10
   static float speed_buffer[FILTER_SIZE] = {0};
   static int filter_idx = 0;
 
@@ -127,6 +152,17 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
 
   msg_pub.data = speed_filtered;
   RCSOFTCHECK(rcl_publish(&publisher, &msg_pub, NULL));
+  
+
+  /* 
+  // Filtro EMA (reemplaza el promedio móvil)
+  #define ALPHA 0.1f
+  static float speed_ema = 0.0f;
+  speed_ema = ALPHA * speed_raw + (1.0f - ALPHA) * speed_ema;
+
+  msg_pub.data = speed_ema;
+  RCSOFTCHECK(rcl_publish(&publisher, &msg_pub, NULL));
+  */
 }
 
 // =======================
@@ -142,7 +178,8 @@ void setup() {
   pinMode(ENC_A, INPUT);
   pinMode(ENC_B, INPUT);
 
-  attachInterrupt(digitalPinToInterrupt(ENC_A), encoder_isr, RISING);
+  attachInterrupt(digitalPinToInterrupt(ENC_A), encoder_isr_A, RISING);
+
 
   ledcSetup(PWM_CHNL, PWM_FRQ, PWM_RES);
   ledcAttachPin(PWM_PIN, PWM_CHNL);
