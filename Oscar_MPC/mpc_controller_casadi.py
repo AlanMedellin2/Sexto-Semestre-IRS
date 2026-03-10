@@ -22,6 +22,7 @@ import rclpy
 from rclpy.node import Node
 
 from nav_msgs.msg import Path, Odometry
+from std_msgs.msg import Float32
 from geometry_msgs.msg import Twist
 
 
@@ -84,6 +85,7 @@ class SimplePathMPCCasadi(Node):
         self.sub_path = self.create_subscription(Path, "/drawn_plan", self.path_cb, 10)
         self.sub_odom = self.create_subscription(Odometry, "/odom", self.odom_cb, 20)
         self.pub_cmd = self.create_publisher(Twist, "/cmd_vel", 10)
+        self.pub_error = self.create_publisher(Float32, "/error", 10)
 
         # ---------- state ----------
         self.have_pose = False
@@ -406,6 +408,11 @@ class SimplePathMPCCasadi(Node):
 
         self.u_prev[:] = [v_cmd, w_cmd]
         self.publish_cmd(v_cmd, w_cmd)
+
+        # --- Publicar error ---
+        error_msg = Float32()
+        error_msg.data = e_th
+        self.pub_error.publish(error_msg)
 
         # ---- clean logs (not spam) ----
         if self.tick_count % self.log_every == 0:
