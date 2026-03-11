@@ -1,11 +1,9 @@
-#!/usr/bin/env python 
-
+#!/usr/bin/env python   
 import rclpy
 from rclpy.node import Node
 import numpy as np
 from std_msgs.msg import Float32
 from rcl_interfaces.msg import SetParametersResult
-from custom_interfaces.msg import Init
 
 class SetPointPublisher(Node):
     def __init__(self):
@@ -25,18 +23,11 @@ class SetPointPublisher(Node):
         self.signal_publisher = self.create_publisher(Float32, 'set_point', 10)
         self.timer = self.create_timer(self.timer_period, self.timer_cb)
 
-        self.init_subscriber = self.create_subscription(
-            Init, 'init_system', self.init_callback, 10
-        )
-
-        self.active = False
         self.signal_msg = Float32()
         self.start_time = self.get_clock().now()
 
-        # Registrar el callback de parámetros
         self.add_on_set_parameters_callback(self.parameters_callback)
-
-        self.get_logger().info(f"SetPoint Node Started  | Signal type: '{self.signal_type}'")
+        self.get_logger().info(f"SetPoint Node Started | Signal type: '{self.signal_type}'")
 
     def parameters_callback(self, params):
         valid_types = ['sine', 'square', 'triangle']
@@ -48,17 +39,10 @@ class SetPointPublisher(Node):
                         successful=False,
                         reason=f"signal_type debe ser uno de: {valid_types}"
                     )
-                # Actualizar la variable interna
                 self.signal_type = param.value
                 self.get_logger().info(f"Signal type cambiado a: '{self.signal_type}'")
 
         return SetParametersResult(successful=True)
-
-    def init_callback(self, msg):
-        if msg.info.data == 'resume':
-            self.active = True
-        else:
-            self.active = False
 
     def generate_signal(self, t):
         phase = self.omega * t
@@ -78,11 +62,9 @@ class SetPointPublisher(Node):
                 return self.amplitude * (3 - 4 * t_mod / period)
 
     def timer_cb(self):
-        if self.active:
-            elapsed_time = (self.get_clock().now() - self.start_time).nanoseconds / 1e9
-            self.signal_msg.data = self.generate_signal(elapsed_time)
-            self.signal_publisher.publish(self.signal_msg)
-
+        elapsed_time = (self.get_clock().now() - self.start_time).nanoseconds / 1e9
+        self.signal_msg.data = self.generate_signal(elapsed_time)
+        self.signal_publisher.publish(self.signal_msg)
 
 def main(args=None):
     rclpy.init(args=args)
