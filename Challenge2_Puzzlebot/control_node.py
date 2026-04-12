@@ -19,7 +19,7 @@ class OpenLoopCtrl(Node):
 
         #Datos figura
         self.side_length = 1.0  
-        self.side_num = 5
+        self.side_num = 4
 
         #Velocidades (la funcion clamp es para que no se salga de los limites)
         self.linear_speed = self.clamp(0.3, self.VEL_LIN_MIN, self.VEL_LIN_MAX)
@@ -28,6 +28,7 @@ class OpenLoopCtrl(Node):
         # Tiempos de rampa 
         self.ramp_time_linear = 1.0  
         self.ramp_time_angular = 0.8 
+        self.time_margin = 1.04
 
         #Formula para calcular los angulos externos de las figuras y convertidos a radianes
         self.angle = 360/self.side_num
@@ -35,8 +36,8 @@ class OpenLoopCtrl(Node):
         #self.angle = ((self.side_num*2)*180)/self.side_num Esta fromula es paar los angulos internos pero no se ocupa xd
 
         # Cálculo de tiempos de ejecución 
-        self.straight_time = self.side_length / self.linear_speed
-        self.turn_time = self.angle_rad / self.angular_speed
+        self.straight_time = self.side_length / self.linear_speed * self.time_margin
+        self.turn_time = self.angle_rad / self.angular_speed * self.time_margin
         
         # Máquina de estados
         self.state = 'STRAIGHT'
