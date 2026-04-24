@@ -11,21 +11,21 @@
 
 ### Gyroscope Features
 The triple-axis MEMS gyroscope in the MPU-60X0 includes a wide range of features:
- Digital-output X-, Y-, and Z-Axis angular rate sensors (gyroscopes) with a user-programmable fullscale range of ±250, ±500, ±1000, and ±2000°/sec: Nos da la velocidad de rotación en grados por segundo. EL rango programable ajusta la resolución.
- External sync signal connected to the FSYNC pin supports image, video and GPS synchronization: útil si hacemos Visual Odometry con una cámara
- Integrated 16-bit ADCs enable simultaneous sampling of gyros
- Improved low-frequency noise performance: Ayuda a que las vibraciones del robot no afecten las mediciones
- Digitally-programmable low-pass filter
- Gyroscope operating current: 3.6mA
- Standby current: 5µA
+* Digital-output X-, Y-, and Z-Axis angular rate sensors (gyroscopes) with a user-programmable fullscale range of ±250, ±500, ±1000, and ±2000°/sec: Nos da la velocidad de rotación en grados por segundo. EL rango programable ajusta la resolución.
+* External sync signal connected to the FSYNC pin supports image, video and GPS synchronization: útil si hacemos Visual Odometry con una cámara
+* Integrated 16-bit ADCs enable simultaneous sampling of gyros
+* Improved low-frequency noise performance: Ayuda a que las vibraciones del robot no afecten las mediciones
+* Digitally-programmable low-pass filter
+* Gyroscope operating current: 3.6mA
+* Standby current: 5µA
 
 ### Accelerometer Features
 The triple-axis MEMS accelerometer in MPU-60X0 includes a wide range of features:
- Digital-output triple-axis accelerometer with a programmable full scale range of ±2g, ±4g, ±8g and
+* Digital-output triple-axis accelerometer with a programmable full scale range of ±2g, ±4g, ±8g and
 ±16g: Solo sirve para detectar si el robot está inclinado
- Integrated 16-bit ADCs enable simultaneous sampling of accelerometers while requiring no external
+* Integrated 16-bit ADCs enable simultaneous sampling of accelerometers while requiring no external
 multiplexer: útil para implementar Filtro de Kalman
- Accelerometer normal operating current: 500µA
+* Accelerometer normal operating current: 500µA
 
 ### Objetivo: El acelerómetro es perfecto para calcular el heading ($\theta$) de nuestro robot. Los encoders se encargarán de calcular el desplazamiento. 
 
