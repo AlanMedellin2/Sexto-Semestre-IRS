@@ -1,3 +1,0 @@
-[console_scripts]
-open_loop_ctrl = puzzlebot_control.open_loop_ctrl:main
-
