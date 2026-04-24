@@ -55,5 +55,5 @@ Y se conectan a la rubik en:
 * SCL -> 5 (jetson)
 * GND -> GND
 * SDA -> 3 (jetson)
-* 
+* Vcc --> 5 v (2 --> jetson)
 
