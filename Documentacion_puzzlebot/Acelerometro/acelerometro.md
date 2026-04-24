@@ -34,5 +34,26 @@ multiplexer: útil para implementar Filtro de Kalman
 ### Sus pines son:
 <img width="800" height="800" alt="image" src="https://github.com/user-attachments/assets/872e4994-f423-46b5-8594-9560ea3d1701" />
 
+* INT: Blanco
+* ADO: Morado
+* XCL: Azul
+* XDA: Verde
+* SDA: Amarillo
+* SCL: Naranja
+* GND: Rojo
+* VCC: Cafe
 
+Solo se usan:
+* INT: Blanco
+* SCL: Naranja
+* SDA: Amarillo
+* GND: Rojo
+* VCC: Cafe
+
+Y se conectan a la rubik en:
+* INT -> 7 (jetson)
+* SCL -> 5 (jetson)
+* GND -> GND
+* SDA -> 3 (jetson)
+* 
 
