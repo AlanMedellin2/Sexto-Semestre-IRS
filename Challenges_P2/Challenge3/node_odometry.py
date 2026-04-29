@@ -4,6 +4,7 @@ from rclpy.node import Node
 from std_msgs.msg import Float32
 from nav_msgs.msg import Odometry as OdomMsg
 import math
+from rclpy.qos import ReliabilityPolicy, QoSProfile
 
 class Odometry(Node):
     def __init__(self):
@@ -21,13 +22,13 @@ class Odometry(Node):
         self.period = 0.05
 
         self.sub_r = self.create_subscription(
-            Float32, "/VelocityEncR", self.right_callback, 10
+            Float32, "/VelocityEncR", self.right_callback, QoSProfile(depth=10, reliability=ReliabilityPolicy.BEST_EFFORT)
         )
         self.sub_l = self.create_subscription(
-            Float32, "/VelocityEncL", self.left_callback, 10
+            Float32, "/VelocityEncL", self.left_callback, QoSProfile(depth=10, reliability=ReliabilityPolicy.BEST_EFFORT)
         )
 
-        self.odom_pub = self.create_publisher(OdomMsg, "/odom", 10)
+        self.odom_pub = self.create_publisher(OdomMsg, "/encoder_odometry", 10)
         self.timer_=self.create_timer(self.period, self.timer_callback)
 
     def wrap_to_pi(self, angle):
