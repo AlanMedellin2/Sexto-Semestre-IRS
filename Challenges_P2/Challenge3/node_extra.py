@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import rclpy #nos deja usar las funciones de Ros
 from rclpy.node import Node
 from geometry_msgs.msg import PoseStamped
@@ -12,10 +13,10 @@ class PointGoals(Node):
         self.meta_actual = 0 #Punto 0 de 4
 
         self.metas = [
-            (2, 0),             #arrancamos de el vértice inferior izquierdo, no inicia desde (0,0) porque suponemos que se encuentra ahí
-            (2, 2),
-            (0, 2),
-            (0, 0),
+            (2.0, 0.0),             #arrancamos de el vértice inferior izquierdo, no inicia desde (0,0) porque suponemos que se encuentra ahí
+            (2.0, 2.0),
+            (0.0, 2.0),
+            (0.0, 0.0),
         ]
        
         self.get_logger().info("Publishing at %d s" %self.period_) #Se ve en la terminal
