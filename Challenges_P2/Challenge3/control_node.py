@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import rclpy
+import math
 from rclpy.node import Node
 from std_msgs.msg import Float32
 from geometry_msgs.msg import Twist
@@ -9,25 +10,32 @@ class ControlP(Node):
         super().__init__("control_node")
         
         self.sub_ED = self.create_subscription(
-            Float32, "/error_distance", self.distance_callback, 10
+            Float32, "/r1/error_distance", self.distance_callback, 10
         )
         self.sub_Etheta = self.create_subscription(
-            Float32, "/error_theta", self.angle_callback, 10
+            Float32, "/r1/error_theta", self.angle_callback, 10
         )
 
-        self.cmd_pub = self.create_publisher(Twist, "/cmd_vel", 10)
+        self.sub_estado = self.create_subscription(
+            Float32, "/r1/estado", self.estado_callback, 10
+        )
+
+        self.cmd_pub = self.create_publisher(Twist, "/r1/cmd_vel", 10)
 
         #Errores
         self.error_d = 0.0
         self.error_theta = 0.0
 
+        #estado
+        self.estado = 0.0
+
         #ganancias
-        self.kd = 0.0   #que tan fuerte responde el robot a la distancia
-        self.k_theta = 0.0 #que tanto va a girar
+        self.kd = 1.5   #que tan fuerte responde el robot a la distancia
+        self.k_theta = 3.0 #que tanto va a girar
 
         #saturaciones
-        self.max_V = 0.0
-        self.max_W = 0.0
+        self.max_V = 0.2
+        self.max_W = 0.6
 
         self.periodo = 0.05
 
@@ -39,6 +47,9 @@ class ControlP(Node):
     def angle_callback(self, msg):
         self.error_theta = msg.data
 
+    def estado_callback(self, msg):
+        self.estado = msg.data
+
     def saturate(self, value, limit):
         if value > limit:
             return limit
@@ -49,6 +60,14 @@ class ControlP(Node):
     def timer_callback(self):
         v = self.kd * self.error_d
         w = self.k_theta * self.error_theta
+
+        # Si el error de ángulo es mayor a 30 grados, mejor no avanzar
+        if abs(self.error_theta) > math.radians(30):
+            v = 0.0
+        
+        if (self.estado == 0.0):
+            v = 0.0
+            w = 0.0
 
         #saturación
         v = self.saturate(v, self.max_V)
