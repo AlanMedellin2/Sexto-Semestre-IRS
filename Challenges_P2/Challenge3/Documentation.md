@@ -115,6 +115,10 @@ $$
 \theta_{k+1} = \theta_k + \omega_k\, \Delta t
 $$
 
+## error.py
+
+El nodo de error 
+
 En dónde $v_k$ y $\omega_k$ son las velocidades lineale y angular previamente calculadas 
 
 
