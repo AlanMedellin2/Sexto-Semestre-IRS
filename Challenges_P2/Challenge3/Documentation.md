@@ -33,6 +33,7 @@ $$
 * $L$ es la distancia entre ambas ruedas
 * $w_R$ es la velocidad angular de la rueda derecha ($w_R = \frac{d{\theta}_R}{dt}$)
 * $w_L$ es la velocidad angular de la rueda izquierda ($w_L = \frac{d{\theta}_L}{dt}$)
+
 Si solo conoces la posición de la rueda, no sabes si el robot en realidad se está moviendo. La velocidad angular (derivada de la posición del ángulo) te dice cuánto gira por segundo. Al multiplicar la velocidad angular por el radio, obtienes la velocidad lineal real. 
 
 Una vez que obtenemos la velocidad lineal y angular del robot, vamos a predecir su posición.
