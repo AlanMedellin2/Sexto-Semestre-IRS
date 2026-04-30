@@ -46,17 +46,17 @@ $V_x = V , V_y = 0$
 
 2)  Queremos encontrar $(x,y)$ en el marco de referencia global. Para ello hay que rotar ese vector transformándolo del marco local al marco global tomando en cuenta su no holonomía:
 
-$$ \begin{bmatrix} \dot{x} \\ \dot{y} \end{bmatrix} =
-\begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix}
-\begin{bmatrix} v \\ 0 \end{bmatrix} $$
+$ \begin{bmatrix} \dot{x} \\ \dot{y} \end{bmatrix} = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} v \\ 0 \end{bmatrix} $
 
 3) Al multiplicar obtenemos:
 $$
-\dot{x} = v\cos\theta \\
+\dot{x} = v\cos\theta
+$$
+$$
 \dot{y} = v\sin\theta 
 $$
 
-4) El razonamiento base para obtener la posición es integrar la velocidad y sumársela a la condición inicial:
+5) El razonamiento base para obtener la posición es integrar la velocidad y sumársela a la condición inicial:
 
 $$
 x(t) = x_0 + \int \dot{x}(t)\, dt
