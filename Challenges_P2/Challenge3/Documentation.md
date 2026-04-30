@@ -47,21 +47,25 @@ $V_x = V , V_y = 0$
 2)  Queremos encontrar $(x,y)$ en el marco de referencia global. Para ello hay que rotar ese vector transformándolo del marco local al marco global tomando en cuenta su no holonomía:
 
 $$
-\begin{aligned}
-\begin{bmatrix}
+\left[
+\begin{array}{c}
 \dot{x} \\
 \dot{y}
-\end{bmatrix}
-&=
-\begin{bmatrix}
+\end{array}
+\right]
+=
+\left[
+\begin{array}{cc}
 \cos\theta & -\sin\theta \\
 \sin\theta & \cos\theta
-\end{bmatrix}
-\begin{bmatrix}
+\end{array}
+\right]
+\left[
+\begin{array}{c}
 v \\
 0
-\end{bmatrix}
-\end{aligned}
+\end{array}
+\right]
 $$
 
 3) Al multiplicar obtenemos:
