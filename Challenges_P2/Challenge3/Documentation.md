@@ -49,6 +49,7 @@ $V_x = V , V_y = 0$
 $ \begin{bmatrix} \dot{x} \\ \dot{y} \end{bmatrix} = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} v \\ 0 \end{bmatrix} $
 
 3) Al multiplicar obtenemos:
+   
 $$
 \dot{x} = v\cos\theta
 $$
