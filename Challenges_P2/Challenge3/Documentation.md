@@ -11,18 +11,23 @@ Este nodo se suscribe a los tópicos /VelocityEncR y /VelocityEncl (velocidad de
 
 En el modelo cinemático del robot diferencial cada rueda aporta la mitad de la velocidad
 
-        $V_R = rw_R$        $V_L = rw_L$        
+$$
+V_R = rw_R
+$$
+$$
+V_L = rw_L
+$$        
         
 La velocidad lineal es:
         
 $$
-V = \frac{V_R + V_L}{2}$
+V = \frac{V_R + V_L}{2}
 $$
 
 Y la velocidad angular es:
 
 $$
-W = \frac{V_R - V_L}{L}$
+W = \frac{V_R - V_L}{L}
 $$
 
 * $L$ es la distancia entre ambas ruedas
