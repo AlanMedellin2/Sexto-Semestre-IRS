@@ -46,7 +46,7 @@ $V_x = V , V_y = 0$
 
 2)  Queremos encontrar $(x,y)$ en el marco de referencia global. Para ello hay que rotar ese vector transformándolo del marco local al marco global tomando en cuenta su no holonomía:
 
-$$
+\[
 \begin{bmatrix}
 \dot{x} \\
 \dot{y}
@@ -60,7 +60,7 @@ $$
 v \\
 0
 \end{bmatrix}
-$$
+\]
 
 3) Al multiplicar obtenemos:
 $$
