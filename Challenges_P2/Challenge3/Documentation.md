@@ -13,8 +13,7 @@ En el modelo cinemático del robot diferencial cada rueda aporta la mitad de la 
 
 $$
 V_R = rw_R
-$$
-$$
+//
 V_L = rw_L
 $$        
         
