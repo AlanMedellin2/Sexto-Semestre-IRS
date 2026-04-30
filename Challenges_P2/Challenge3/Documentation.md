@@ -22,7 +22,7 @@ $$
 Y la velocidad angular es:
 
 $$
-V = \frac{V_R - V_L}{L}$
+W = \frac{V_R - V_L}{L}$
 $$
 
 * $L$ es la distancia entre ambas ruedas
@@ -36,9 +36,9 @@ Una vez que obtenemos la velocidad lineal y angular del robot, vamos a predecir 
 * Eje x: hacia adelante o hacia atrás
 * Eje y: lateral (no se puede)
 Por lo tanto:
-$$
+$ 
 V_x = V , V_y = 0
-$$
+$
 
 2)  Queremos encontrar $(x,y)$ en el marco de referencia global. Para ello hay que rotar ese vector transformándolo del marco local al marco global tomando en cuenta su no holonomía:
 
