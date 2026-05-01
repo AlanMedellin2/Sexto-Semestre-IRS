@@ -73,7 +73,7 @@ $$
 \dot{y} = v\sin\theta 
 $$
 
-5) El razonamiento base para obtener la posición es integrar la velocidad y sumársela a la condición inicial:
+4) El razonamiento base para obtener la posición es integrar la velocidad y sumársela a la condición inicial:
 
 $$
 x(t) = x_0 + \int \dot{x}(t)\, dt
@@ -115,7 +115,7 @@ $$
 \theta_{k+1} = \theta_k + \omega_k\, \Delta t
 $$
 
-En dónde $v_k$ y $\omega_k$ son las velocidades lineale y angular previamente calculadas 
+En dónde $v_k$ y $\omega_k$ son las velocidades lineal y angular previamente calculadas 
 
 ## error.py
 
