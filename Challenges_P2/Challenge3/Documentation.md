@@ -351,15 +351,15 @@ $$
 $$
 
 $$
-\lambda = \sqrt(-k_i)
+\lambda = \sqrt{-k_i}
 $$
 
 $$
-\lambda = \sqrt(-1)\sqrt(k_i)
+\lambda = \sqrt{-1}\sqrt{k_i}
 $$
 
 $$
-\lambda = \pm i \sqrt(k_i)
+\lambda = \pm i \sqrt{k_i}
 $$
 
 Para resolver lambda a partir de raíces complejas con la siguiente forma en donde $\alpha$ es la parte real y $\beta$ es la parte imaginaria:
@@ -377,11 +377,11 @@ $$
 Sustituyendo:
 
 $$
-e(t) = e_{exponencial}^{(0) t}(C_1 \cos{\sqrt(-k_i) t} + C_2 \sin{\sqrt(-k_i) t})
+e(t) = e_{exponencial}^{(0) t}(C_1 \cos{(\sqrt{-k_i} t)} + C_2 \sin{(\sqrt{-k_i} t}))
 $$
 
 $$
-e(t) = C_1 \cos{\sqrt(-k_i) t} + C_2 \sin{\sqrt(-k_i) t}
+e(t) = C_1 \cos{(\sqrt{-k_i} t)} + C_2 \sin{(\sqrt{-k_i} t)}
 $$
 
 Al incluir senos y cosenos la integral por sí sola tiende a oscilar cerca del punto de referencia.
