@@ -452,7 +452,7 @@ $$(1 + k_d) \dot{e} = -k_p e$$
 
 $$\dot{e} = - \left( \frac{k_p}{1 + k_d} \right) e$$
 
-Resultado: Ecuación de primer orden muy parecida a la de la ganancia proporcional P pero aquí esta se divide entre $(1+k_d)$. Significa que mientras más rápido cambie el error, la ganancia proporcional se reduce y por ende, la velocidad también.
+Resultado: Ecuación de primer orden muy parecida a la de la ganancia proporcional P pero aquí esta se divide entre $(1+k_d)$. Significa que mientras más rápido cambie el error, la ganancia proporcional se reduce o aumenta y, por ende, la velocidad también.
 
 
 # Control PID
