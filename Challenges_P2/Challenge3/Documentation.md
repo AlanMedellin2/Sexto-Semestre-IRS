@@ -196,7 +196,7 @@ Es un nodo de control en lazo cerrado que se suscribe a los tópicos:
 
 y publica comandos de tipo Twist() en el tópico /cmd_vel
 
-### Ganancia Proporcional:
+
 Tomando en cuenta la definición del error como la diferencia entre un estado de referencia y un estado actual:
 
 $$
@@ -215,6 +215,8 @@ $$\dot{e} = 0 - v$$
 
 $$\dot{e} = -v$$
 
+
+### Ganancia Proporcional:
 Partiendo de un error (por ejemplo, el error de distancia previamente calculado), la acción de control depende directamente del error actual:
 
 $$
