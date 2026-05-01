@@ -151,7 +151,7 @@ donde:
 
 $atan2$ es una función trigonométrica que calcula el ángulo entre el eje x positivo del sistema de referencia (marco global) y el punto definido por las coordenadas catesianas (x,y). Básicamente calcula qué ángulo tiene la línea que conecta el robot con la meta respecto al eje x global:
 
-<img width="1119" height="683" alt="image" src="https://github.com/user-attachments/assets/27afe202-228c-459f-9d3e-7836c37136f8" />
+<img width="500" height="340" alt="image" src="https://github.com/user-attachments/assets/27afe202-228c-459f-9d3e-7836c37136f8" />
 
 
 Por ejemplo, el ángulo deseado se calcula con la siguiente función de arcotangente2:
