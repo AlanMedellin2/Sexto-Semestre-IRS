@@ -187,7 +187,102 @@ $$
 Se aplican $\sin()$ y $\cos()$ para representar ese ángulo como un punto dentro del círculo unitario. De esta manera atan2() siempre devuelve un ángulo entre $(-\pi, \pi]$
 
 
+## closed_loop_ctrl.py
 
+Es un nodo de control en lazo cerrado que se suscribe a los tópicos:
+* /error_distance (Float32)
+* /error_theta (Float32)
+* /estado (Float32)
+
+y publica comandos de tipo Twist() en el tópico /cmd_vel
+
+#### Ganancia Proporcional:
+Partiendo de un error (por ejemplo, el error de distancia previaamente calculado), la acción de control depende directamente del error actual:
+
+$$
+v = k_d * e_d
+$$
+
+La velocidad será proporcional a qué tan lejos esté el robot del objetivo. La ganancia K solo aumenta o disminuye la magnitud de la proproción. La ecuación que describe cómo cambia el error es:
+
+$$
+\dot{e} = -k*e
+$$
+
+Esta es una ecuación diferencial de primer orden. Se puede reescribir como:
+
+$$
+\frac{de}{de} = -ke
+$$
+
+Separamos variables:
+
+$$
+(\frac{1}{e})de = -kdt
+$$
+
+Integramos ambos lados:
+
+$$
+∫e1​de=∫−kdt
+$$
+
+Resultado:
+
+$$
+ln∣e∣=−kt+C
+$$
+
+Ahora, el logaritmo natural y la exponencial son funciones inversas: $e^{ln(x)} = x$ y $ln(e^x) = x$
+Aplicamos exponencial a ambos lados de la ecuación:
+
+$$
+e^{ln|e|}=e^{−kt+C}
+$$
+
+Simplificamos:
+
+$$
+|e| =e^{−kt} e^{C}
+$$
+
+Como $C$ es una constante arbitraria de integración, $e^C$ también es una constante (siempre positiva) $e^C = C$ . Al añadir el signo $\pm$ del valor absoluto al lado derecho de la ecuación, permitimos que la constante sea tanto positiva como negativa:
+
+$$
+e(t) =(\pm C)e^{−kt}
+$$
+
+Para que esta ecuación nos sea útil, necesitamos saber cuánto vale esa constante $\pm C$. Para ello analizamos el sistema en el tiempo $(t = 0)$, que es el momento exacto en el que el sistema empieza a cambiar. Evaluamos la función en $t = 0$:
+
+$$
+e(0) =(\pm C)e^{−k(0)}
+$$
+
+$$
+e(0) =(\pm C)e^{0}
+$$
+
+$$
+e(0) =(\pm C)*1
+$$
+
+Por lo tanto, el error en el tiempo cero es nuestro error inicial:
+
+$$
+\pm C =e_0
+$$
+
+Al sustituir $\pm C$ de vuelta en nuestra ecuación, obtenemos la ley de evolución temporal del error para un control proporcional:
+
+$$
+e(t) = e_0 e^{-k t}
+$$
+
+<img width="1059" height="405" alt="image" src="https://github.com/user-attachments/assets/2cedbf1f-fcfa-4f46-87e9-6879c3b926b5" />
+Simulación de la evolución del error con un error inicial de 2.0 metros y una ganancia K_p = 0.5
+
+<img width="1059" height="405" alt="image" src="https://github.com/user-attachments/assets/c6ab7d4a-cb61-43c9-8604-305450c03356" />
+Simulación de la evolución del error con un error inicial de 2.0 metros y una ganancia K_p = 1.5
 
 
  
