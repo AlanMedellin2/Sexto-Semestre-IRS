@@ -119,7 +119,68 @@ En dónde $v_k$ y $\omega_k$ son las velocidades lineale y angular previamente c
 
 ## error.py
 
-El nodo de error 
+El nodo de error se suscribe al tópico de odometría de los ecoders (/ground_truth en simulación) para tomar esa pose como la pose actual del robot. También recibe los puntos (goals) que el robot tiene que alcanzar en el mapa. Este nodo publica:
+* /error_distance: error en m entre el punto actual y el punto goal
+* /error_theta: error en radianes de alineación entre el heading actual y el deseado
+* /estado: es solo un tópico que envía 1 o 0 en caso de que llegue al último punto de la secuencia
+
+Los puntos (goals) se almacenan uno por uno en una cola llamada "buffer_metas". Mientras haya puntos de meta almacenados en la cola se van a calcular y publicar dos errores:
+
+#### Error de distancia:
+Se calcula mediante la fórmula de distancia entre dos puntos:
+$$
+d = \sqrt{(x_g - x_r)^2 + (y_g - y_r)^2}
+$$
+
+En dónde:
+* $x_g$ $y_g$ son los componentes del punto de meta
+* $x_r$ $y_r$ son los componentes del punto actual
+
+#### Error de ángulo:
+
+La orientación actual del robot ($\theta_{actual}$) es la conversión de la orientación en cuaterniones que nos entrega el tópico de odometría en ángulo de Euler (yaw). Esta conversión se hace mediante una función llamada "euler_from_quaternion()" que calcula el yaw con:
+
+$$
+\theta = \atan2{(2(q_w * q_z + q_x * q_y)),(1 - 2({q_y}² + {q_x}²))}
+$$
+
+donde:
+* $q = (x,y,z,w)$
+* $x² + y² + z² + w² = 1$
+
+$atan2$ es una función trigonométrica que calcula el ángulo entre el eje x positivo del sistema de referencia (marco global) y el punto definido por las coordenadas catesianas (x,y). Básicamente calcula qué ángulo tiene la línea que conecta el robot con la meta respecto al eje x global:
+
+<img width="1119" height="683" alt="image" src="https://github.com/user-attachments/assets/27afe202-228c-459f-9d3e-7836c37136f8" />
+
+Por ejemplo, el ángulo deseado se calcula con la siguiente función de arcotangente2:
+
+desired_yaw = math.atan2(y_g - y_r, x_g - x_r)
+
+Primero hay que visualizar el vector que se forma de la resta de ambos puntos:
+$$
+(\delta{x}, \delta{y}) = (x_g - x_r, y_g - y_r)
+$$
+
+en donde: 
+* $\delta{x}$: cuánto hay que moverse en X para ir del robot a la meta
+* $\delta{y}$: cuánto hay que moverse en Y para ir del robot a la meta
+
+Esto forma un vector con una componente x,y. Para obtener el ángulo de ese vector respecto al eje X global se utiliza la función "atan2()".
+
+Por último, el error entre ambos ángulos se calcula con:
+
+$$
+\theta_{error} = \atan2{(\sin(\delta{\theta})),((\cos(\delta{\theta}))}
+$$
+
+en donde:
+
+$$
+\delta{\theta} = \theta_{deseada} - \theta_{actual}
+$$
+
+Se aplican $\sin()$ y $\cos()$ para representar ese ángulo como un punto dentro del círculo unitario. De esta manera atan2() siempre devuelve un ángulo entre $(-\pi, \pi]$
+
 
 
 
