@@ -196,17 +196,17 @@ Es un nodo de control en lazo cerrado que se suscribe a los tópicos:
 
 y publica comandos de tipo Twist() en el tópico /cmd_vel
 
-#### Ganancia Proporcional:
+### Ganancia Proporcional:
 Partiendo de un error (por ejemplo, el error de distancia previaamente calculado), la acción de control depende directamente del error actual:
 
 $$
-v = k_d * e_d
+v = k_d  e_d
 $$
 
 La velocidad será proporcional a qué tan lejos esté el robot del objetivo. La ganancia K solo aumenta o disminuye la magnitud de la proproción. La ecuación que describe cómo cambia el error es:
 
 $$
-\dot{e} = -k*e
+\dot{e} = -ke
 $$
 
 Esta es una ecuación diferencial de primer orden. Se puede reescribir como:
