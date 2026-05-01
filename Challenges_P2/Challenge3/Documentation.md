@@ -119,7 +119,7 @@ En dónde $v_k$ y $\omega_k$ son las velocidades lineal y angular previamente ca
 
 ## error.py
 
-El nodo de error se suscribe al tópico de odometría de los ecoders (/ground_truth en simulación) para tomar esa pose como la pose actual del robot. También recibe los puntos (goals) que el robot tiene que alcanzar en el mapa. Este nodo publica:
+El nodo de error se suscribe al tópico de odometría de los encoders (/ground_truth en simulación) para tomar esa pose como la pose actual del robot. También recibe los puntos (goals) que el robot tiene que alcanzar en el mapa. Este nodo publica:
 * /error_distance: error en m entre el punto actual y el punto goal
 * /error_theta: error en radianes de alineación entre el heading actual y el deseado
 * /estado: es solo un tópico que envía 1 o 0 en caso de que llegue al último punto de la secuencia
