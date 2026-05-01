@@ -197,13 +197,7 @@ Es un nodo de control en lazo cerrado que se suscribe a los tópicos:
 y publica comandos de tipo Twist() en el tópico /cmd_vel
 
 ### Ganancia Proporcional:
-Partiendo de un error (por ejemplo, el error de distancia previamente calculado), la acción de control depende directamente del error actual:
-
-$$
-v = k_d  e_d
-$$
-
-La velocidad será proporcional a qué tan lejos esté el robot del objetivo. La ganancia K solo aumenta o disminuye la magnitud de la proproción. Tomando en cuenta la definición del error como la diferencia entre un estado de referencia y un estado actual:
+Tomando en cuenta la definición del error como la diferencia entre un estado de referencia y un estado actual:
 
 $$
 e(t) = x_{ref} - x(t)
@@ -216,6 +210,18 @@ $$
 $$
 
 El estado de referencia suele ser un punto fijo (coordenada en el mapa), por lo que la derivada de una constante es 0. Por otro lado, la derivada de la posición $x(t)$ es la velocidad del robot. Por lo tanto, la ecuación que describe cómo cambia el error es:
+
+$$\dot{e} = 0 - v$$
+
+$$\dot{e} = -v$$
+
+Partiendo de un error (por ejemplo, el error de distancia previamente calculado), la acción de control depende directamente del error actual:
+
+$$
+v = k_d  e_d
+$$
+
+La velocidad será proporcional a qué tan lejos esté el robot del objetivo. La ganancia K solo aumenta o disminuye la magnitud de la proproción. En este caso, la tasa de cambio del error se ve influenciada por la ganancia proporcional:
 
 $$
 \dot{e} = -ke
