@@ -392,9 +392,123 @@ Evolución del error aplicando solamente ganancia integral con un valor de 0.1
 <img width="475" height="285" alt="image" src="https://github.com/user-attachments/assets/e7b3fada-5dd8-4b96-b7c1-46f7797aef51" />
 Evolución del error aplicando solamente ganancia integral con un valor de 5.0
 
+### Ganancia Derivativa:
+La ganancia derivativa depende de qué tan rápidp está cambiando el error en ese momento (futuro) y se define así:
+
+$$v = k_d \frac{de}{dt}$$
+
+Si la derivada del error cambia rápido con signo positivo (nos estamos alejando del objetivo), al multiplicarse por la ganancia $k_d$ el valor de la velcoidad aumenta. En el caso de que cambie con signo negativo (nos estamos acercando al objetivo), la velocidad se reduce. Si el error es constante, la derivada es 0 y la velocidad es 0 también. La ganancia derivativa no empuja hacia el objetivo, solo modifica la velocidad dependiendo de la tendencia. La ganancia derivativa se ve así:
+
+$$v = k_d \frac{de}{dt}
+
+La evolución del error es la siguiente:
+
+Volvemos a asumir que:
+
+$$\dot{e} = -v$$
+
+Con la ganancia derivativa quedaría:
+
+$$\dot{e} = -k_d\dot{e}$$
+
+Agrupamos y factorizamos:
+
+$$(1+k_d)\dot{e} = 0$$
+
+$$\dot{e} = 0$$
+
+La acción derivativa no genera movimiento por sí sola, solo sirve para frenar y estabilizar. 
+
+# Control PI
+Ley de control:
+
+$$v = k_p e + k_i \int e dt$$
+
+Evolución del error:
+
+$$\dot{e} = -(k_p e + k_i \int e dt)$$
+
+Derivamos ambos lados con respecto al tiempo:
+
+$$\ddot{e} = -k_p \dot{e} - k_i e$$
+
+$$\ddot{e} + k_p \dot{e} + k_i e = 0$$
+
+Resultado: Ecuación de un oscilador armónico amortiguado
+* $k_p$ amortigua
+* $k_i$ actúa como un resorte 
 
 
+# Control PD
+Ley de control:
+
+$$v = k_p e + k_d \dot{e}$$
+
+Evolución del error:
+
+$$\dot{e} = -(k_p e + k_d \dot{e})$$
+
+Agrupamos y despejamos:
+
+$$\dot{e} + k_d \dot{e} = -k_p e$$
+
+$$(1 + k_d) \dot{e} = -k_p e$$
+
+$$\dot{e} = - \left( \frac{k_p}{1 + k_d} \right) e$$
+
+Resultado: Ecuación de primer orden muy parecida a la de la ganancia proporcional P pero aquí esta se divide entre $(1+k_d)$. Significa que mientras más rápido cambie el error, la ganancia proporcional se reduce y por ende, la velocidad también.
 
 
+# Control PID
+Ley de control:
+
+$$v = k_p e + k_i \int e dt + k_d \dot{e}$$
+
+Evolución del error:
+
+$$\dot{e} = -k_p e - k_i \int e dt - k_d \dot{e}$$
+
+Derivamos toda la ecuación para eliminar la integral:
+
+$$\ddot{e} = -k_p \dot{e} - k_i e - k_d \ddot{e}$$
+
+Agrupamos:
+
+$$(1 + k_d) \ddot{e} + k_p \dot{e} + k_i e = 0$$
+
+Resultado: El PID convierte la evolución del error en un sistema físico virtual donde, mediante las ganancias, decidimos si queremos que el robot llegue como un resorte suave, como un golpe seco o como un movimiento amortiguado perfecto.
+
+# Discretización PID:
+
+$$u[t] = K_p e[t] + K_i \sum (e[t] \Delta t) + K_d \frac{e[t] - e[t-1]}{\Delta t}$$
+
+```python
+// Variables globales o de estado del PID
+float e_anterior = 0;
+float integral = 0;
+
+float calcularPID(float consigna, float valor_actual, float dt) {
+    // 1. Calcular el error actual
+    float e = consigna - valor_actual;
+
+    // 2. Término Proporcional
+    float P = Kp * e;
+
+    // 3. Término Integral (Acumulamos el error multiplicado por el tiempo)
+    integral += e * dt;
+    float I = Ki * integral;
+
+    // 4. Término Derivativo (Cambio del error entre el paso actual y el anterior)
+    float D = Kd * (e - e_anterior) / dt;
+
+    // 5. Salida total
+    float salida = P + I + D;
+
+    // 6. Guardar error para el siguiente ciclo
+    e_anterior = e;
+
+    return salida;
+}
+```
 
 
