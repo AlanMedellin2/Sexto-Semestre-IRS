@@ -128,6 +128,7 @@ Los puntos (goals) se almacenan uno por uno en una cola llamada "buffer_metas". 
 
 #### Error de distancia:
 Se calcula mediante la fórmula de distancia entre dos puntos:
+
 $$
 d = \sqrt{(x_g - x_r)^2 + (y_g - y_r)^2}
 $$
@@ -141,7 +142,7 @@ En dónde:
 La orientación actual del robot ($\theta_{actual}$) es la conversión de la orientación en cuaterniones que nos entrega el tópico de odometría en ángulo de Euler (yaw). Esta conversión se hace mediante una función llamada "euler_from_quaternion()" que calcula el yaw con:
 
 $$
-\theta = \atan2{(2(q_w * q_z + q_x * q_y)),(1 - 2({q_y}² + {q_x}²))}
+\theta = \operatorname{atan2}(2(q_w * q_z + q_x * q_y)),(1 - 2({q_y}² + {q_x}²))
 $$
 
 donde:
@@ -158,25 +159,25 @@ desired_yaw = math.atan2(y_g - y_r, x_g - x_r)
 
 Primero hay que visualizar el vector que se forma de la resta de ambos puntos:
 $$
-(\delta{x}, \delta{y}) = (x_g - x_r, y_g - y_r)
+(\Delta{x}, \Delta{y}) = (x_g - x_r, y_g - y_r)
 $$
 
 en donde: 
-* $\delta{x}$: cuánto hay que moverse en X para ir del robot a la meta
-* $\delta{y}$: cuánto hay que moverse en Y para ir del robot a la meta
+* $\Delta{x}$: cuánto hay que moverse en X para ir del robot a la meta
+* $\Delta{y}$: cuánto hay que moverse en Y para ir del robot a la meta
 
 Esto forma un vector con una componente x,y. Para obtener el ángulo de ese vector respecto al eje X global se utiliza la función "atan2()".
 
 Por último, el error entre ambos ángulos se calcula con:
 
 $$
-\theta_{error} = \atan2{(\sin(\delta{\theta})),((\cos(\delta{\theta}))}
+\theta_{error} = \atan2{(\sin(\Delta{\theta})),((\cos(\Delta{\theta}))}
 $$
 
 en donde:
 
 $$
-\delta{\theta} = \theta_{deseada} - \theta_{actual}
+\Delta{\theta} = \theta_{deseada} - \theta_{actual}
 $$
 
 Se aplican $\sin()$ y $\cos()$ para representar ese ángulo como un punto dentro del círculo unitario. De esta manera atan2() siempre devuelve un ángulo entre $(-\pi, \pi]$
