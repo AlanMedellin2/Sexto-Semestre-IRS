@@ -160,6 +160,7 @@ desired_yaw = math.atan2(y_g - y_r, x_g - x_r)
 ```
 
 Primero hay que visualizar el vector que se forma de la resta de ambos puntos:
+
 $$
 (\Delta{x}, \Delta{y}) = (x_g - x_r, y_g - y_r)
 $$
