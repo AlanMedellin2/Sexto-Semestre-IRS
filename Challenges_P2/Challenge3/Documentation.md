@@ -317,15 +317,15 @@ $$
 En donde la integral define el área bajo la curva del error desde el inicio hasta el momento actual t. Mientras más tiempo pase, el error se irá acumulando y la velocidad seguirá creciendo. 
 La evolución del error tomando en cuenta solo la ganancia integral sería:
 
-$$\dot{e}=−k_i​∫edt$$
+$$\dot{e}=−k_i​ \intedt$$
 
 Si derivamos ambos lados para eliminar la integral nos queda:
 
-$$\ddot{e}=−k_i​e$$
+$$\ddot{e}=−k_i ​e$$
 
 Reescribimos:
 
-$$\ddot{e} + k_i​e = 0$$
+$$\ddot{e} + k_i​ e = 0$$
 
 Esta es una ecuación diferencial lineal homogénea de segundo orden. Para resolverlo, utilizamos el método de la ecuación característica en donde:
 * $e(t) = e^{\lambda t}$
