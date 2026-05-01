@@ -153,6 +153,7 @@ $atan2$ es una función trigonométrica que calcula el ángulo entre el eje x po
 
 <img width="1119" height="683" alt="image" src="https://github.com/user-attachments/assets/27afe202-228c-459f-9d3e-7836c37136f8" />
 
+
 Por ejemplo, el ángulo deseado se calcula con la siguiente función de arcotangente2:
 
 ```python
