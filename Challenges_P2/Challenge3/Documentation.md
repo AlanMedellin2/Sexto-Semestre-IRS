@@ -197,7 +197,7 @@ Es un nodo de control en lazo cerrado que se suscribe a los tópicos:
 y publica comandos de tipo Twist() en el tópico /cmd_vel
 
 ### Ganancia Proporcional:
-Partiendo de un error (por ejemplo, el error de distancia previaamente calculado), la acción de control depende directamente del error actual:
+Partiendo de un error (por ejemplo, el error de distancia previamente calculado), la acción de control depende directamente del error actual:
 
 $$
 v = k_d  e_d
@@ -212,7 +212,7 @@ $$
 Esta es una ecuación diferencial de primer orden. Se puede reescribir como:
 
 $$
-\frac{de}{de} = -ke
+\frac{de}{dt} = -ke
 $$
 
 Separamos variables:
