@@ -317,7 +317,7 @@ $$
 En donde la integral define el área bajo la curva del error desde el inicio hasta el momento actual t. Mientras más tiempo pase, el error se irá acumulando y la velocidad seguirá creciendo. 
 La evolución del error tomando en cuenta solo la ganancia integral sería:
 
-$$\dot{e}=−k_i​ \intedt$$
+$$\dot{e}=−k_i​ ∫edt$$
 
 Si derivamos ambos lados para eliminar la integral nos queda:
 
