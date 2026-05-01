@@ -397,11 +397,7 @@ La ganancia derivativa depende de qué tan rápidp está cambiando el error en e
 
 $$v = k_d \frac{de}{dt}$$
 
-Si la derivada del error cambia rápido con signo positivo (nos estamos alejando del objetivo), al multiplicarse por la ganancia $k_d$ el valor de la velcoidad aumenta. En el caso de que cambie con signo negativo (nos estamos acercando al objetivo), la velocidad se reduce. Si el error es constante, la derivada es 0 y la velocidad es 0 también. La ganancia derivativa no empuja hacia el objetivo, solo modifica la velocidad dependiendo de la tendencia. La ganancia derivativa se ve así:
-
-$$v = k_d \frac{de}{dt}$$
-
-La evolución del error es la siguiente:
+Si la derivada del error cambia rápido con signo positivo (nos estamos alejando del objetivo), al multiplicarse por la ganancia $k_d$ el valor de la velcoidad aumenta. En el caso de que cambie con signo negativo (nos estamos acercando al objetivo), la velocidad se reduce. Si el error es constante, la derivada es 0 y la velocidad es 0 también. La ganancia derivativa no empuja hacia el objetivo, solo modifica la velocidad dependiendo de la tendencia. La evolución del error es la siguiente:
 
 Volvemos a asumir que:
 
