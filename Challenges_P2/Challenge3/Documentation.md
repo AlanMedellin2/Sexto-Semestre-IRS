@@ -299,10 +299,10 @@ $$
 e(t) = e_0 e^{-k t}
 $$
 
-<img width="1059" height="405" alt="image" src="https://github.com/user-attachments/assets/2cedbf1f-fcfa-4f46-87e9-6879c3b926b5" />
+<img width="528" height="202" alt="image" src="https://github.com/user-attachments/assets/2cedbf1f-fcfa-4f46-87e9-6879c3b926b5" />
 Simulación de la evolución del error con un error inicial de 2.0 metros y una ganancia K_p = 0.5
 
-<img width="1059" height="405" alt="image" src="https://github.com/user-attachments/assets/c6ab7d4a-cb61-43c9-8604-305450c03356" />
+<img width="528" height="202" alt="image" src="https://github.com/user-attachments/assets/c6ab7d4a-cb61-43c9-8604-305450c03356" />
 Simulación de la evolución del error con un error inicial de 2.0 metros y una ganancia K_p = 1.5
 
 ### Ganancia Integral:
@@ -386,10 +386,10 @@ $$
 
 Al incluir senos y cosenos la integral por sí sola tiende a oscilar cerca del punto de referencia.
 
-<img width="950" height="570" alt="image" src="https://github.com/user-attachments/assets/22faa54c-24c0-4ac7-ba28-eec18384df36" />
+<img width="475" height="285" alt="image" src="https://github.com/user-attachments/assets/22faa54c-24c0-4ac7-ba28-eec18384df36" />
 Evolución del error aplicando solamente ganancia integral con un valor de 0.1
 
-<img width="950" height="570" alt="image" src="https://github.com/user-attachments/assets/e7b3fada-5dd8-4b96-b7c1-46f7797aef51" />
+<img width="475" height="285" alt="image" src="https://github.com/user-attachments/assets/e7b3fada-5dd8-4b96-b7c1-46f7797aef51" />
 Evolución del error aplicando solamente ganancia integral con un valor de 5.0
 
 
