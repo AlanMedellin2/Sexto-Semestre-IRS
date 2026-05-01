@@ -224,7 +224,7 @@ $$
 Integramos ambos lados:
 
 $$
-∫e1​de=∫−kdt
+∫\frac{1}{e}​de=∫−kdt
 $$
 
 Resultado:
