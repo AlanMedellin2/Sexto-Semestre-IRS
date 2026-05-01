@@ -142,7 +142,7 @@ En dónde:
 La orientación actual del robot ($\theta_{actual}$) es la conversión de la orientación en cuaterniones que nos entrega el tópico de odometría en ángulo de Euler (yaw). Esta conversión se hace mediante una función llamada "euler_from_quaternion()" que calcula el yaw con:
 
 $$
-\theta = \operatorname{atan2}(2(q_w * q_z + q_x * q_y)),(1 - 2({q_y}² + {q_x}²))
+\theta = \text{atan2}(2(q_w * q_z + q_x * q_y)),(1 - 2({q_y}² + {q_x}²))
 $$
 
 donde:
@@ -155,7 +155,9 @@ $atan2$ es una función trigonométrica que calcula el ángulo entre el eje x po
 
 Por ejemplo, el ángulo deseado se calcula con la siguiente función de arcotangente2:
 
+```python
 desired_yaw = math.atan2(y_g - y_r, x_g - x_r)
+```
 
 Primero hay que visualizar el vector que se forma de la resta de ambos puntos:
 $$
@@ -171,7 +173,7 @@ Esto forma un vector con una componente x,y. Para obtener el ángulo de ese vect
 Por último, el error entre ambos ángulos se calcula con:
 
 $$
-\theta_{error} = \atan2{(\sin(\Delta{\theta})),((\cos(\Delta{\theta}))}
+\theta_{error} = \text{atan2}(\sin(\Delta{\theta})),((\cos(\Delta{\theta}))
 $$
 
 en donde:
