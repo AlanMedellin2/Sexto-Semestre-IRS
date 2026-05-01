@@ -315,5 +315,86 @@ v_i = k_i \int_{0}^{t} e(\tau) d\tau
 $$
 
 En donde la integral define el área bajo la curva del error desde el inicio hasta el momento actual t. Mientras más tiempo pase, el error se irá acumulando y la velocidad seguirá creciendo. 
+La evolución del error tomando en cuenta solo la ganancia integral sería:
+
+$$\dot{e}=−k_i​∫edt$$
+
+Si derivamos ambos lados para eliminar la integral nos queda:
+
+$$\ddot{e}=−k_i​e$$
+
+Reescribimos:
+
+$$\ddot{e} + k_i​e = 0$$
+
+Esta es una ecuación diferencial lineal homogénea de segundo orden. Para resolverlo, utilizamos el método de la ecuación característica en donde:
+* $e(t) = e^{\lambda t}$
+* $\dot{e(t)} = \lambda e^{\lambda t}$
+* $\ddot{e(t)} = \lambda^2 e^{\lambda t}$
+
+Sustituyendo en nuestra ecuación original: 
+
+$$
+\lambda^2 e^{\lambda t} + k_i e^{\lambda t} = 0
+$$
+
+La ecuación característica quedaría así:
+
+$$
+\lambda^2 + k_i = 0
+$$
+
+Despejamos y simplificamos:
+
+$$
+\lambda^2  = -k_i 
+$$
+
+$$
+\lambda = \sqrt(-k_i)
+$$
+
+$$
+\lambda = \sqrt(-1)\sqrt(k_i)
+$$
+
+$$
+\lambda = \pm i \sqrt(k_i)
+$$
+
+Para resolver lambda a partir de raíces complejas con la siguiente forma en donde $\alpha$ es la parte real y $\beta$ es la parte imaginaria:
+
+$$
+\lambda = \alpha + i \beta
+$$
+
+Se toma la forma polar del número complejo para formar la siguiente ecuación:
+
+$$
+e(t) = e_{exponencial}^{\alpha t}(C_1 \cos{\beta t} + C_2 \sin{\beta t})
+$$
+
+Sustituyendo:
+
+$$
+e(t) = e_{exponencial}^{(0) t}(C_1 \cos{\sqrt(-k_i) t} + C_2 \sin{\sqrt(-k_i) t})
+$$
+
+$$
+e(t) = C_1 \cos{\sqrt(-k_i) t} + C_2 \sin{\sqrt(-k_i) t}
+$$
+
+Al incluir senos y cosenos la integral por sí sola tiende a oscilar cerca del punto de referencia.
+
+<img width="950" height="570" alt="image" src="https://github.com/user-attachments/assets/22faa54c-24c0-4ac7-ba28-eec18384df36" />
+Evolución del error aplicando solamente ganancia integral con un valor de 0.1
+
+<img width="950" height="570" alt="image" src="https://github.com/user-attachments/assets/e7b3fada-5dd8-4b96-b7c1-46f7797aef51" />
+Evolución del error aplicando solamente ganancia integral con un valor de 5.0
+
+
+
+
+
 
 
