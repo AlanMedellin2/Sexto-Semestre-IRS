@@ -203,7 +203,19 @@ $$
 v = k_d  e_d
 $$
 
-La velocidad será proporcional a qué tan lejos esté el robot del objetivo. La ganancia K solo aumenta o disminuye la magnitud de la proproción. La ecuación que describe cómo cambia el error es:
+La velocidad será proporcional a qué tan lejos esté el robot del objetivo. La ganancia K solo aumenta o disminuye la magnitud de la proproción. Tomando en cuenta la definición del error como la diferencia entre un estado de referencia y un estado actual:
+
+$$
+e(t) = x_{ref} - x(t)
+$$
+
+Podemos derivar la ecuación para ver cómo cambia el error en el tiempo:
+
+$$
+\frac{d}{dt}e(t) = \frac{d}{dt}(x_{ref} - x(t))
+$$
+
+El estado de referencia suele ser un punto fijo (coordenada en el mapa), por lo que la derivada de una constante es 0. Por otro lado, la derivada de la posición $x(t)$ es la velocidad del robot. Por lo tanto, la ecuación que describe cómo cambia el error es:
 
 $$
 \dot{e} = -ke
@@ -285,5 +297,15 @@ Simulación de la evolución del error con un error inicial de 2.0 metros y una 
 <img width="1059" height="405" alt="image" src="https://github.com/user-attachments/assets/c6ab7d4a-cb61-43c9-8604-305450c03356" />
 Simulación de la evolución del error con un error inicial de 2.0 metros y una ganancia K_p = 1.5
 
+### Ganancia Integral:
+Mientras que la ganancia proporcional reacciona al error actual, la ganancia integral mira hacia el pasado. Su función es acumular (integrar) el error a lo largo del tiempo. La ganancia proporcional por sí sola presenta un problema llamado: Error de estado estacionario. Surge cuando, en robótica por ejemplo, el error es tan pequeño que la velocidad generada por la ganancia proporcional no es suficiente para vencer la fricción de las llantas con el suelo y el robot no llega a su objetivo. La ganancia integral soluciona este problema sumando ese pequeño error hasta que la fuerza es lo suficientemente grande para mover al robot. 
 
- 
+La ganancia integral se ve de la siguiente manera:
+
+$$
+v_i = k_i \int_{0}^{t} e(\tau) d\tau
+$$
+
+En donde la integral define el área bajo la curva del error desde el inicio hasta el momento actual t. Mientras más tiempo pase, el error se irá acumulando y la velocidad seguirá creciendo. 
+
+
