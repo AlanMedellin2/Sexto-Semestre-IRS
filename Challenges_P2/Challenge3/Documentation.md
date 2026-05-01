@@ -233,7 +233,8 @@ $$
 ln∣e∣=−kt+C
 $$
 
-Ahora, el logaritmo natural y la exponencial son funciones inversas: $e^{ln(x)} = x$ y $ln(e^x) = x$
+Ahora, el logaritmo natural y la exponencial son funciones inversas: $e^{ln(x)} = x$ y $ln(e^x) = x$.
+
 Aplicamos exponencial a ambos lados de la ecuación:
 
 $$
