@@ -32,7 +32,7 @@ multiplexer: útil para implementar Filtro de Kalman
 ### Voltaje de funcionamiento: 3.3 V a 5 V.
 
 ### Sus pines son:
-<img width="800" height="800" alt="image" src="https://github.com/user-attachments/assets/872e4994-f423-46b5-8594-9560ea3d1701" />
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/872e4994-f423-46b5-8594-9560ea3d1701" />
 
 * INT: Blanco
 * ADO: Morado
