@@ -64,7 +64,7 @@ Para obtener la posición a partir del IMU, necesitas realizar una doble integra
 * Aceleración $\xrightarrow{\int}$ Velocidad $\xrightarrow{\int}$ Posición
 * Velocidad Angular $\xrightarrow{\int}$ Orientación (Ángulo)
 
-Debido al ruido en las mediciones de aceleración no es recomendable utilizar el IMU para calcular el desplazamiento del robot. LO mejor es solamente calcular su orientación de la siguiente manera:
+Debido al ruido en las mediciones de aceleración no es recomendable utilizar el IMU para calcular el desplazamiento del robot. Lo mejor es solamente calcular su orientación de la siguiente manera:
 
 $$\theta(t) = \theta_0 + \int_{0}^{t} \omega(t) \,dt$$
 
@@ -81,7 +81,7 @@ En dónde:
 * $\Delta t$ es un intervalo de tiempo (usualmente el tiempo entre envío de mensajes del IMU)
 * $\omega_z$ es la velocidad angular que vamos a considerar constante durante ese intervalo de tiempo $\Delta t$
 
-Se utiliza el eje de rotacion $Z$ porque siguiendo la regla de la mano derecha, el eje $Z$ apuunta hacia arriba del robot. Al girar ese eje, el robot cambia su orientación (yaw) y define su dirección de avance. 
+Se utiliza el eje de rotacion $Z$ porque siguiendo la regla de la mano derecha, el eje $Z$ apunta hacia arriba del robot. Al girar ese eje, el robot cambia su orientación (yaw) y define su dirección de avance. 
 
 ```python
 #self.theta = 0.0  
@@ -104,10 +104,12 @@ def imu_callback(self, msg):
 El mensaje de tipo stamp dentro de algunas interfaces de ROS2 es un objetco con dos campos enteros:
 
 header:
+
   stamp:
+  
     sec: 53
+    
     nanosec: 460000000
-  frame_id: r1/base_footprint
 
 En donde:
 * sec: segundos transcurridos
