@@ -103,13 +103,10 @@ def imu_callback(self, msg):
 ¿Por qué current_time es la sumatoria de dos campos?
 El mensaje de tipo stamp dentro de algunas interfaces de ROS2 es un objetco con dos campos enteros:
 
-header:
 
-  stamp:
-  
-    sec: 53
-    
-    nanosec: 460000000
+stamp:
+* sec: 53
+* nanosec: 460000000
 
 En donde:
 * sec: segundos transcurridos
