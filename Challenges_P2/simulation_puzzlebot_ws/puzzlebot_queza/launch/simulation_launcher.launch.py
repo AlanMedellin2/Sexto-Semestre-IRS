@@ -84,6 +84,7 @@ def generate_launch_description():
             '/world/world_model/model/'+robot_ns+'/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model',
             '/world/world_model/pose/info@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V',
             '/'+robot_ns+'/camera/image_raw@sensor_msgs/msg/Image[ignition.msgs.Image',
+            '/'+robot_ns+'/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU',
         ],
         parameters=[{'qos_overrides./model/'+robot_ns+'.subscriber.reliability': 'reliable'}],
         output='screen',
@@ -92,6 +93,7 @@ def generate_launch_description():
             ('/model/'+robot_ns+'/odometry', '/'+robot_ns+'/odom'),
             ('/world/world_model/model/'+robot_ns+'/joint_state', '/'+robot_ns+'/joint_states'),
             ('/'+robot_ns+'/camera/image_raw', '/'+robot_ns+'/logi_camera/image'),
+            ('/'+robot_ns+'/imu', '/'+robot_ns+'/imu'),
         ]
     )
     
