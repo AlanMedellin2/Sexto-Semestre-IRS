@@ -83,7 +83,7 @@ En dónde:
 
 Se utiliza el eje de rotacion $Z$ porque siguiendo la regla de la mano derecha, el eje $Z$ apuunta hacia arriba del robot. Al girar ese eje, el robot cambia su orientación (yaw) y define su dirección de avance. 
 
-´´´ Python
+´´´python
 #self.theta = 0.0  
 #self.last_time = None 
 
@@ -115,7 +115,7 @@ En donde:
 
 El tiempo actual es la suma de esos dos campos convertidos en segundos. Si el IMU no proporciona el stamp con el tiempo por defecto, se le debe de agregar al código de la siguiente manera:
 
-´´´ Python
+´´´python
 from rclpy.clock import Clock
 
 msg.header.stamp = self.get_clock().now().to_msg()
