@@ -1,8 +1,8 @@
 # La Rubik tiene el siguiente PINOUT:
 
-<img width="1168" height="769" alt="image" src="https://github.com/user-attachments/assets/87f9db85-c0bb-4bac-87a5-92728bd961fd" />
+<img width="584" height="383" alt="image" src="https://github.com/user-attachments/assets/87f9db85-c0bb-4bac-87a5-92728bd961fd" />
 
-<img width="1218" height="631" alt="image" src="https://github.com/user-attachments/assets/96720c60-7a10-4373-8633-5d56bbc43fd0" />
+<img width="609" height="315" alt="image" src="https://github.com/user-attachments/assets/96720c60-7a10-4373-8633-5d56bbc43fd0" />
 
 # El acelerómetro tiene los siguiente ejes de sensibilidad:
 <img width="667" height="286" alt="image" src="https://github.com/user-attachments/assets/0f7384d5-8328-401d-af2a-e418649fd15b" />
