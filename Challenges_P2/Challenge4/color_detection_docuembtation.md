@@ -50,8 +50,8 @@ Después, se convierte el formato BGR del frame a HSV con la función "cv2.cvtCo
    $$R' = R/255, \quad G' = G/255, \quad B' = B/255$$
    
 2) Cáculo de V: es el máximo de entre los tres valores previamente normalizados
-3) Cáculo de $\delta$: Es la diferencia entre el máximo y el mínimo
-4) Cálculo de S: $S = \frac{\delta}{max}$ si $max$ es diferente de 0. Si $max = 0$, $S = 0$
+3) Cáculo de $\Delta$: Es la diferencia entre el máximo y el mínimo
+4) Cálculo de S: $S = \frac{\Delta}{max}$ si $max$ es diferente de 0. Si $max = 0$, $S = 0$
 5) Cáculo de H:
    * Si $\max = R'$, entonces $H = 60^\circ \times \left( \frac{G' - B'}{\Delta} \pmod 6 \right)$
    * Si $\max = G'$, entonces $H = 60^\circ \times \left( \frac{B' - R'}{\Delta} + 2 \right)$
