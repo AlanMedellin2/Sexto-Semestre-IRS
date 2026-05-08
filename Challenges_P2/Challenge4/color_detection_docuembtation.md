@@ -77,6 +77,17 @@ El siguiente paso es recorrer nuestro diccionario en dónde en cada iteración s
 ```python
 mask = np.zeros((frame_h, frame_w), dtype=np.uint8)
 ```
+Después, se recorre cada rango de cada color, Se escanea cada toda la matriz hsv y si un pixel está dentro de los límites "lower" y "uper", se le aisgna un valor de 255 (blanco). Si no, se le asigna un 0 (negro). El resultado es una máscara parcial que resalta las zonas que coinciden con ese color. Se hace mediante la función:
+
+```python
+partial_mask = cv2.inRange(hsv, lower, upper)
+```
+
+Luego luego se hace una operación OR entre la máscara completamente negra que definimos al inicio de la iteración con la máscara parcial para actualizarla. EN el caso de los colores amarillo y verde, como solo tienen un rango, no tiene mucho sentido hacer eso. SOlo habría que tomar la máscara parcial y ya. Pero como el rojo tiene dos rangos, esta operación se hace dos veces para actualizar el valor entre los dos rangos que tiene:
+
+```python
+mask = cv2.bitwise_or(mask, partial_mask)
+```
 
 
  
