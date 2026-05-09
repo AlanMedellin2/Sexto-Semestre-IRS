@@ -88,6 +88,10 @@ Luego luego se hace una operación OR entre la máscara completamente negra que 
 ```python
 mask = cv2.bitwise_or(mask, partial_mask)
 ```
+Ahora, hay que limpiar el ruido de la imagen que se genera naturalmente mediante un kernel (ventana) llena de unos:
 
+```python
+mask = cv2.bitwise_or(mask, partial_mask)
+```
 
  
