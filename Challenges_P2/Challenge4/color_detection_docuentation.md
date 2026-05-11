@@ -103,11 +103,11 @@ La función "cv2.findContours" "dibuja" el borde de cada mancha blanca que encue
 contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 for cnt in contours:
 
-                area = cv2.contourArea(cnt)
+area = cv2.contourArea(cnt)
 
-                if area < 800: # Ignorar ruidos pequeños
+if area < 800: # Ignorar ruidos pequeños
 
-                    continue
+    continue
 ```
 
 En este punto ya sabemos que el objeto tiene el color correcto y el tamaño adecuado, pero no sabemos si es un círculo que represente las luces de un semáforo. Para ello primero se calcula el permímetro con la función "cv2.arcLength" en donde el True indica que es un controno cerrado. Posteriormente, se calcula la circularidad:
@@ -121,13 +121,13 @@ En donde:
 ```python
 # --- FILTRO 1: CIRCULARIDAD ---
 
-                # Un círculo perfecto tiene circularidad = 1
+# Un círculo perfecto tiene circularidad = 1
 
-                perimeter = cv2.arcLength(cnt, True)
+perimeter = cv2.arcLength(cnt, True)
 
-                if perimeter == 0: continue
+if perimeter == 0: continue
 
-                circularity = 4 * np.pi * (area / (perimeter * perimeter))
+circularity = 4 * np.pi * (area / (perimeter * perimeter))
 ```
 
 Ahora vamos a corroborar qué tan "estirado está ese cícrulo. La función "cv2.boundingRect" encierra el controno del círculo en un rectángulo imaginario en donde:
@@ -140,13 +140,13 @@ Después se calcula la relación de aspecto dividiendo el ancho entre el alto. S
 ```python
 # --- FILTRO 2: RELACIÓN DE ASPECTO ---
 
-                x, y, w, h = cv2.boundingRect(cnt)
+x, y, w, h = cv2.boundingRect(cnt)
 
-                aspect_ratio = float(w)/h
+aspect_ratio = float(w)/h
 
-                if 0.6 < circularity < 1.2 and 0.7 < aspect_ratio < 1.3:
+if 0.6 < circularity < 1.2 and 0.7 < aspect_ratio < 1.3:
 
-                    total_objects += 1
+    total_objects += 1
 ```
 
 Para mostrar la detección en pantalla se utilizan las siguientes funciones:
@@ -156,9 +156,9 @@ Para mostrar la detección en pantalla se utilizan las siguientes funciones:
 ```python
 # Dibujar detección
 
-                    cv2.rectangle(frame, (x, y), (x + w, y + h), self.draw_colors[color_name], 2)
+cv2.rectangle(frame, (x, y), (x + w, y + h), self.draw_colors[color_name], 2)
 
-                    cv2.putText(frame, f"Semaforo: {color_name}", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.draw_colors[color_name], 2)
+cv2.putText(frame, f"Semaforo: {color_name}", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.draw_colors[color_name], 2)
 ```
 
 Finalmente, se publica un número por el tópico /color dependiendo del color detectado:
