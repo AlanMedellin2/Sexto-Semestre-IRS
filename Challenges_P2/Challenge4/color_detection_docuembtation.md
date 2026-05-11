@@ -88,10 +88,83 @@ Luego luego se hace una operación OR entre la máscara completamente negra que 
 ```python
 mask = cv2.bitwise_or(mask, partial_mask)
 ```
-Ahora, hay que limpiar el ruido de la imagen que se genera naturalmente mediante un kernel (ventana) llena de unos:
+Ahora, hay que limpiar el ruido de la imagen que se genera naturalmente mediante un kernel (ventana) llena de unos. La función "cv2.morphologyEX" hace que el kernel recorra la imagen y vaya "encogiendo" los píxeles blancos. Si tras el recorrido algunas manchas sobreviven, regresan a su tamaño original. Sirve para eliminar ruido de brillo y para suavizar bordes.
 
 ```python
-mask = cv2.bitwise_or(mask, partial_mask)
+kernel = np.ones((5, 5), np.uint8)
+mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
 ```
 
- 
+Después de limpiar la imagen con la morfología, ya no tenemos píxeles sueltos, sino "manchas" blancas sólidas. Ahora hay que identificar individualmente esas manchas y descartar aquellas que no tengan el tamaño suficiente para ser un semáforo. 
+
+La función "cv2.findContours" "dibuja" el borde de cada mancha blanca que encuentra en la máscara mask. Se usasn parámetros para decirle a OpenCV que solo busque contornos externos (si hubiera una mancha blanca con un agujero negro en medio, ignoraría el agujero y solo tomaría el borde de afuera). Al final, la variable "contours" contiene una lista de todos los contornos encontrados. El guion bajo _ es una forma de ignorar un segundo valor que devuelve la función (la jerarquía), que no necesitamos aquí. Luego, por cada controno se calcula cuántos pixeles mide la superficie de esa mancha y se descartan con base en un threshold:
+
+```python
+contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+for cnt in contours:
+
+                area = cv2.contourArea(cnt)
+
+                if area < 800: # Ignorar ruidos pequeños
+
+                    continue
+```
+
+En este punto ya sabemos que el objeto tiene el color correcto y el tamaño adecuado, pero no sabemos si es un círculo que represente las luces de un semáforo. Para ello primero se calcula el permímetro con la función "cv2.arcLength" en donde el True indica que es un controno cerrado. Posteriormente, se calcula la circularidad:
+
+$$C = \frac{4\pi \cdot A}{P^2}$$
+
+En donde:
+* $A$ es el área.
+* $P$ es el perímetro.
+
+```python
+# --- FILTRO 1: CIRCULARIDAD ---
+
+                # Un círculo perfecto tiene circularidad = 1
+
+                perimeter = cv2.arcLength(cnt, True)
+
+                if perimeter == 0: continue
+
+                circularity = 4 * np.pi * (area / (perimeter * perimeter))
+```
+
+Ahora vamos a corroborar qué tan "estirado está ese cícrulo. La función "cv2.boundingRect" encierra el controno del círculo en un rectángulo imaginario en donde:
+* x, y: Son las coordenadas de la esquina superior izquierda del rectángulo.
+* w (width): El ancho del rectángulo en píxeles.
+* h (height): El alto del rectángulo en píxeles.
+
+Después se calcula la relación de aspecto dividiendo el ancho entre el alto. Si $w = h$ el resultado es 1.0 (un cuadrado perfecto). La circularidad debe de tener un valor mayor a 0.6 y la relación de aspecto mayor a 0.7. Si esas dos condiciones se cumplen, entonces hemos detectado una luz de semáforo. 
+
+```python
+# --- FILTRO 2: RELACIÓN DE ASPECTO ---
+
+                x, y, w, h = cv2.boundingRect(cnt)
+
+                aspect_ratio = float(w)/h
+
+                if 0.6 < circularity < 1.2 and 0.7 < aspect_ratio < 1.3:
+
+                    total_objects += 1
+```
+
+Para mostrar la detección en pantalla se utilizan las siguientes funciones:
+* cv2.rectangle(): dibuja un cuadro alrededor del objeto detectado Usando las coordenadas de la equina superiror izquierda y la inferior derecha. EL número 2 es el grosor de las líneas
+* cv2.putText(): esta función escribe un texto encima del cuadro para indicar qué color se está detectando.
+
+```python
+# Dibujar detección
+
+                    cv2.rectangle(frame, (x, y), (x + w, y + h), self.draw_colors[color_name], 2)
+
+                    cv2.putText(frame, f"Semaforo: {color_name}", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, self.draw_colors[color_name], 2)
+```
+
+Finalmente, se publica un número por el tópico /color dependiendo del color detectado:
+* Amarillo: 1.0
+* Verde: 2.0
+* Rojo: 3.0
+* Otro: 0.0
+
+
