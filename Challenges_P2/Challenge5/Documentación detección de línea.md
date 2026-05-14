@@ -154,3 +154,5 @@ Este filtro se realiza con la siguiente función en dónde se indica el tamaño 
 #Suavizamos y usamos gaussiano para reducir el ruido antes de analizar la imagen
 blurred = cv.GaussianBlur(gris_image, (5, 5), 0)
 ```
+
+
