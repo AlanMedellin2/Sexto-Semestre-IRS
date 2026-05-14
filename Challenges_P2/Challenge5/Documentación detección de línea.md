@@ -109,21 +109,41 @@ Calculamos los pesos de cada coordenada reemplazando los valores de $x,y$ en la 
 
 Lo que nos da:
 
-$$W = \begin{bmatrix} 0.0585 & 0.0965 & 0.0585 \\ 0.0965 & \mathbf{0.1591} & 0.0965 \\ 0.0585 & 0.0965 & 0.0585 \end{bmatrix}$$
+$$W = \begin{bmatrix} 
+0.0585 & 0.0965 & 0.0585 \\ 
+0.0965 & \mathbf{0.1591} & 0.0965 \\ 
+0.0585 & 0.0965 & 0.0585 
+\end{bmatrix}$$
 
 Ahora vamos a normalizar esa matriz. Para ello, se deben de sumar los nxn valores (en nuetsro caso 9). Esto nos da: $0.7791$ y se divide cada valor de la matriz entre ese número. Cömo resultado obtenemos:
 
-$$W = \begin{bmatrix} 0.075 & 0.124 & 0.075 \\ 0.124 & 0.204 & 0.124 \\ 0.075 & 0.124 & 0.075 \end{bmatrix}$$
+$$W = \begin{bmatrix} 
+0.075 & 0.124 & 0.075 \\ 
+0.124 & 0.204 & 0.124 \\ 
+0.075 & 0.124 & 0.075 
+\end{bmatrix}$$
 
 Y multiplicamos la ventana de Luminancia $L$ por la ventana de pesos $W$:
 
 Suponiendo que L:
 
-$$L = \begin{bmatrix} 100 & 102 & 100 \\ 98 & 200 & 105 \\ 101 & 103 & 99 \end{bmatrix}$$
+$$L = \begin{bmatrix} 
+100 & 102 & 100 \\ 
+98 & 200 & 105 \\ 
+101 & 103 & 99 
+\end{bmatrix}$$
 
 La operación es:
 
-$$\begin{bmatrix} 100 \cdot 0.075 & 102 \cdot 0.124 & 100 \cdot 0.075 \\ 98 \cdot 0.124 & 200 \cdot 0.204 & 105 \cdot 0.124 \\ 101 \cdot 0.075 & 103 \cdot 0.124 & 99 \cdot 0.075 \end{bmatrix} = \begin{bmatrix} 7.5 & 12.64 & 7.5 \\ 12.15 & 40.8 & 13.02 \\ 7.57 & 12.77 & 7.42 \end{bmatrix}$$
+$$\begin{bmatrix} 
+100 \cdot 0.075 & 102 \cdot 0.124 & 100 \cdot 0.075 \\ 
+98 \cdot 0.124 & 200 \cdot 0.204 & 105 \cdot 0.124 \\ 
+101 \cdot 0.075 & 103 \cdot 0.124 & 99 \cdot 0.075 
+\end{bmatrix} = \begin{bmatrix} 
+7.5 & 12.64 & 7.5 \\ 
+12.15 & 40.8 & 13.02 \\ 
+7.57 & 12.77 & 7.42 
+\end{bmatrix}$$
 
 3) Ahora sumamos todos esos valores $= 121.37 = 121$
 4) Reemplazamos el píxel central por ese nuevo valor. Antes era $200$ y ahora con el filtro es $121$
