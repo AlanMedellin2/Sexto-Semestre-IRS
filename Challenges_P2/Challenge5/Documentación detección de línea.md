@@ -89,7 +89,11 @@ Donde:
 
 Para un kernel de $3 \times 3$, las coordenadas de cada celda respecto al centro $(0,0)$ son:
 
-$$\begin{bmatrix} (-1, 1) & (0, 1) & (1, 1) \\ (-1, 0) & (0, 0) & (1, 0) \\ (-1, -1) & (0, -1) & (1, -1) \end{bmatrix}$$
+$$\begin{bmatrix}
+(-1, 1) & (0, 1) & (1, 1) \\
+(-1, 0) & \mathbf{(0, 0)} & (1, 0) \\
+(-1, -1) & (0, -1) & (1, -1)
+\end{bmatrix}$$
 
 Calculamos los pesos de cada coordenada reemplazando los valores de $x,y$ en la ecuación considerando $\sigma = 1$:
 
