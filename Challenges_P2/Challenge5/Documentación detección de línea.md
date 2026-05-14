@@ -208,3 +208,11 @@ Limpia detalles finales en la imagen del trapecio. Primero se crea un kernel. Lu
 
 Se hace primero la erosión para eliminar ruido y la dilatación va después para regresar los bordes al estado original pero con el ruido eliminado. 
 
+```python
+#Morphological operations
+kernel = np.ones((3,3), np.uint8)
+
+morph = cv.erode(binary_masked, kernel, iterations=1)
+
+morph = cv.dilate(morph, kernel, iterations=1)
+```
