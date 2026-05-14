@@ -155,4 +155,56 @@ Este filtro se realiza con la siguiente función en dónde se indica el tamaño 
 blurred = cv.GaussianBlur(gris_image, (5, 5), 0)
 ```
 
+### Binarización
+
+El objetivo es separar la línea a seguir del suelo den la imagen. En una imagen binaria solo existen dos estados: 0 (negro) y 255 (blanco).
+La función "cv.threshold(imagen de entrada, punto de corte, valor máximo de intensidad)" devuelve el umbral usado (en este caso se coloca un _ para indicar que no nos interesa que lo devuelva) y también devuelve una matriz que solo contiene píxeles binarizados. En este caso, "80" es el punto de corte. SIgnifica que si un píxel tiene un valor de luminancia menor a 80, se csonidera oscuro y su valor pasará a ser de 255 (blanco) para resaltar los colores negros:
+
+```python
+_, binary = cv.threshold(blurred,80, 255, cv.THRESH_BINARY_INV)
+```
+
+### Máscara trapezoidal
+
+El carril a detectar, por la perspectiva de la cámara, se ve como un trapecio geométricamente. Para facilitar su detección, se añade un filtro geométrico que distinga carriles y facilite el seguimiento de la línea. Primero se definen el ancho de la base superior del trapecio (60%) de nuestro corte ROI y se define dónde empieza el trapecio desde arriba (30%):
+
+```python
+top_width = int(roi_w * 0.6)
+top_y = int(roi_h * 0.3)
+```
+
+Luego, se crea un arreglo con las 4 esquinas que forman la figura cada uno como una coordenada (x,y):
+
+```python
+trapezoid = np.array([[
+
+  ((roi_w - top_width) // 2, top_y),
+
+  ((roi_w + top_width) // 2, top_y),
+
+  (roi_w, roi_h),
+
+  (0, roi_h)
+
+  ]], dtype=np.int32)
+```
+
+Después se crea una máscara completamente negra (llena de ceros) y con la función "cv.fillPoly" se dibuja ese trapecio en la máscara rellenado de color blanco:
+
+```python
+mask = np.zeros((roi_h, roi_w), dtype=np.uint8)
+cv.fillPoly(mask, trapezoid, 255)
+```
+
+Por último, se compara la imagen binarizada con la máscara del trapecio píxel por pixel con una operación AND en dónde sólo los pixeles que coincidan dentro del trapesio se pasan tal cual y como venían en la imagen. Los demás se quedan en negro. Se pasa "binary" dos veces como parámetro de la función "cv.bitwise_and()" solo por convención de OpenCV:
+
+```python
+binary_masked = cv.bitwise_and(binary, binary, mask=mask)
+```
+
+### Limpieza morfológica
+
+Limpia detalles finales en la imagen del trapecio. Primero se crea un kernel. Luego, se aplica una función de erosión "cv.erode()" el cual, si todos los píxeles que están dentro del kernel son blancos, el píxel central se queda blanco. SI alguno es negro, el centro se vuelve negro. Sirve para lijar los bordes. Luego haces el proceso opuesto con dilatación "cv.dilate()" en dónde si un píxel dentro de la ventana es blanco, el centro será blanco.
+
+Se hace primero la erosión para eliminar ruido y la dilatación va después para regresar los bordes al estado original pero con el ruido eliminado. 
 
