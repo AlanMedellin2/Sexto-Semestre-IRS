@@ -251,5 +251,85 @@ Por ello, vamos a calcular el centroide de otra manera
 
 ### Centroide
 
-La función "cv.connectedComponentsWithStats()" 
+La función "cv.connectedComponentsWithStats()" separa y etiqueta con un número cada mancha blanca dentro del trapecio de forma independiente. Se puede decir que detecta objetos. Para decidir si un pixel está conectado con otro, se utiliza un parámetro "connectivity" el cuál:
+* 4: Solo considera vecinos arriba, abajo, izquierda y derecha.
+* 8: También considera las diagonales. Es mucho más robusta para seguir la línea del Puzzlebot, porque si la línea está inclinada y los píxeles solo se tocan por las esquinas, con 8 los seguirá viendo como un solo objeto.
+
+Esa función devuelve 4 resultados:
+1) "num_labels" : Es un número que dice cuántos objetos encontró
+2) "labels": Es una matriz del mismo tamaño que tu imagen, pero en lugar de 0 y 255, cada píxel tiene el número del objeto al que pertenece empezando por el fondo como objeto 0.
+3) "stats": Es una matriz donde cada fila es un objeto y las columnas te dan su información física:
+   * cv.CC_STAT_LEFT: Coordenada $x$ donde empieza el objeto.
+   * cv.CC_STAT_TOP: Coordenada $y$ donde empieza.
+   * cv.CC_STAT_WIDTH: Ancho del objeto.
+   * cv.CC_STAT_HEIGHT: Alto del objeto.
+   * cv.CC_STAT_AREA: Cuántos píxeles tiene el objeto.
+4) centroide: Te da directamente las coordenadas $(x, y)$ del centro de masa de cada objeto.
+
+```python
+num_labels, labels, stats, centroids = cv.connectedComponentsWithStats(morph, connectivity=8)
+```
+
+### Filtrado de línea deseada:
+
+Se define una banda vertical que parte del centro de la imagen y abarca un 20% del ancho del roi. Se vana  usar para decidir en qué dirección girar dependiendo de si el centroide es menor o mayor a las delimitaciones:
+
+```python
+zona_central_min = int(roi_w * 0.40)
+zona_central_max = int(roi_w * 0.60)
+```
+
+Se recorre cada objeto detectado dentro del trapesio y se filtran solo los objetos cuya esté entre los rangos previamente establecido al inicio del código:
+
+```python
+for i in range(1, num_labels):
+
+            x, y, bw, bh, area = stats[i]
+
+            cx, cy = centroids[i]
+
+            if Area_min <= area <= Area_max:
+
+                candidatos.append((cx, cy, area, x, y, bw, bh))
+```
+
+De los objetos filtrados, se elige el que esté más cercano al centro ("ref_x") con una función "min()" que se asemeja a un $argmin$, es decir, devuelve el objeto que minimice nuestra condición a un estado deseado. En este caso, esa condición se define con una variable lambda que representa la distancia (error) entre el centroide en X del objeto y el centro de referencia de la imagen en X. Se elige al que esté más cerca de la linea central en X y se guardan sus características de "stats":
+
+```python
+if len(candidatos) > 0:
+
+        # Elegir solo una línea: la más cercana al centro
+
+            cx, cy, area, x, y, bw, bh = min(
+
+            candidatos,
+
+            key=lambda linea: abs(linea[0] - ref_x)
+
+            )
+
+            lineas_validas.append((cx, cy, area, x, y, bw, bh))
+```
+
+
+### Error
+
+Se calcula la distancia en píxeles entre el centroide de la linea y el centro de la cámara en el eje X:
+
+```python
+error_x = int(cx - ref_x)
+```
+
+Y se dibuja una línea meramente estética entre el pixel más bajo del eje X del centro de la imagen al centroide de la línea. Los parámetros son "cv.line(imagen en donde se va a colocar, punto de inicio, puntofinal, color BGR, grosor)":
+
+```python
+ cv.line(output_final, (ref_x, roi_h), (int(cx), int(cy)), (0, 255, 255), 2)
+```
+
+
+# Video
+
+https://youtu.be/so3mA7U1VVE?si=nSfz9Z7a8siONj8k
+
+
 
