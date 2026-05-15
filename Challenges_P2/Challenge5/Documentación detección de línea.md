@@ -1,6 +1,6 @@
 # Detección de línea
 
-El objetivo de este nodo es detectar la línea central del carril del mapa del puzzlebot con el fin de establecer un path de seguimiento. Para ello se utilizan dos librerías:
+El objetivo de este nodo es detectar la línea central del carril del mapa del puzzlebot con el fin de establecer un método seguimiento. Para ello se utilizan dos librerías:
 * cv2: Librería de OpenCV
 * numpy: Librería para manejo de datos y matrices
 
@@ -14,7 +14,7 @@ video_path = "/dev/video0"
 cap = cv.VideoCapture(video_path)
 ```
 
-Después se establecen rangos de área en los que una máscara binarizada es capaz de decidir si las manchas con cierta área dentor de este umbral se considera una línea o no:
+Después se establecen rangos de área en los que una máscara binarizada es capaz de decidir si las manchas con cierta área dentro de este umbral se considera una línea o no:
 
 ```python
 Area_min = 200   #Píxeles
@@ -36,9 +36,9 @@ h, w = originalFr.shape[:2]
 
 ### Cálculo de ROI
 
-ROI significa Region of Interest (Región de Interés). En lugar de procesar toda la imagen, te quedas solo con una parte en la que sabes que está tu objeto de interés. EN este caso, sabemos que el suelo es en dónde se va a encontrar la línea a detectar.
+ROI significa Region of Interest (Región de Interés). En lugar de procesar toda la imagen, te quedas solo con una parte en la que sabes que está tu objeto de interés. En este caso, sabemos que el suelo es en dónde se va a encontrar la línea a detectar.
 
-En nuetsro código simplemente se corta la imagen asiganndo una variable "roi" que contenga los píxeles de la imagen original pero empezando desde píxel que represente el 60% de arriba hacia abajo de la altura total y que recorra todas la filas restantes:
+En nuetsro código simplemente se corta la imagen asignando una variable "roi" que contenga los píxeles de la imagen original pero empezando desde el píxel que represente el 60% de arriba hacia abajo de la altura total y que recorra todas la filas restantes:
 
 ```python
 roi = originalFr[int(h*0.6):h, :] #60% de altura, : --> todas las columnas
@@ -76,7 +76,7 @@ gris_image = cv.cvtColor(roi, cv.COLOR_BGR2GRAY)
 
 Su objetivo es eliminar el ruido (esos granitos de sal y pimienta que aparecen en la cámara) para que, cuando busquemos la línea, el algoritmo no se confunda con pequeños puntos brillantes u oscuros en el suelo.
 
-Se utiliza un kenerl (ventana de nxn píxeles) que recorre toda la imagen y en cada iteración realiza:
+Se utiliza un kernel (ventana de nxn píxeles) que recorre toda la imagen y en cada iteración realiza:
 1) Superposición: El centro del kernel se coloca sobre un píxel.
 2) Multiplicación: Se multiplica el valor de cada píxel de la imagen por el peso que le corresponde en el kernel gaussiano. Para aclcular los pesos se utiliza la siguiente fórmula:
 
@@ -157,8 +157,8 @@ blurred = cv.GaussianBlur(gris_image, (5, 5), 0)
 
 ### Binarización
 
-El objetivo es separar la línea a seguir del suelo den la imagen. En una imagen binaria solo existen dos estados: 0 (negro) y 255 (blanco).
-La función "cv.threshold(imagen de entrada, punto de corte, valor máximo de intensidad)" devuelve el umbral usado (en este caso se coloca un _ para indicar que no nos interesa que lo devuelva) y también devuelve una matriz que solo contiene píxeles binarizados. En este caso, "80" es el punto de corte. SIgnifica que si un píxel tiene un valor de luminancia menor a 80, se csonidera oscuro y su valor pasará a ser de 255 (blanco) para resaltar los colores negros:
+El objetivo es separar la línea a seguir del suelo en la imagen. En una imagen binaria solo existen dos estados: 0 (negro) y 255 (blanco).
+La función "cv.threshold(imagen de entrada, punto de corte, valor máximo de intensidad)" devuelve el umbral usado (en este caso se coloca un _ para indicar que no nos interesa que lo devuelva) y también devuelve una matriz que solo contiene píxeles binarizados. En este caso, "80" es el punto de corte. Significa que si un píxel tiene un valor de luminancia menor a 80, se considera oscuro y su valor pasará a ser de 255 (blanco) para resaltar los colores negros:
 
 ```python
 _, binary = cv.threshold(blurred,80, 255, cv.THRESH_BINARY_INV)
@@ -204,7 +204,7 @@ binary_masked = cv.bitwise_and(binary, binary, mask=mask)
 
 ### Limpieza morfológica
 
-Limpia detalles finales en la imagen del trapecio. Primero se crea un kernel. Luego, se aplica una función de erosión "cv.erode()" el cual, si todos los píxeles que están dentro del kernel son blancos, el píxel central se queda blanco. SI alguno es negro, el centro se vuelve negro. Sirve para lijar los bordes. Luego haces el proceso opuesto con dilatación "cv.dilate()" en dónde si un píxel dentro de la ventana es blanco, el centro será blanco.
+Limpia detalles finales en la imagen del trapecio. Primero se crea un kernel. Luego, se aplica una función de erosión "cv.erode()" el cual, si todos los píxeles que están dentro del kernel son blancos, el píxel central se queda blanco. Si alguno es negro, el centro se vuelve negro. Sirve para lijar los bordes. Luego haces el proceso opuesto con dilatación "cv.dilate()" en dónde si un píxel dentro de la ventana es blanco, el centro será blanco.
 
 Se hace primero la erosión para eliminar ruido y la dilatación va después para regresar los bordes al estado original pero con el ruido eliminado. 
 
@@ -230,11 +230,11 @@ Esta fórmula es la base de la Estadística Espacial en imágenes ya que describ
 
 ¿Qué significan los órdenes del momento?
 
-1) Si ponemos $i=0$ y $j=0$ obtenemos el área:
+1) Si ponemos $i=0$ y $j=0$, obtenemos el área:
 
 $$M_{00} = \sum_{x,y} x^0 y^0 I(x,y) = \sum_{x,y} 1 \cdot 1 \cdot I(x,y)$$
 
-2) Si ponemos $i=01$ y $j=0$ o viceversa (momentos de primer orden) obtenemos la posición en cada coordenada:
+2) Si ponemos $i=01$ y $j=0$ o viceversa (momentos de primer orden), obtenemos la posición en cada coordenada:
 
 * $M_{10}$ ($i=1, j=0$): Suma las coordenadas $x$ de todos los píxeles blancos ($\sum x \cdot I(x,y)$).
 * $M_{01}$ ($i=0, j=1$): Suma las coordenadas $y$ de todos los píxeles blancos ($\sum y \cdot I(x,y)$).
@@ -272,14 +272,14 @@ num_labels, labels, stats, centroids = cv.connectedComponentsWithStats(morph, co
 
 ### Filtrado de línea deseada:
 
-Se define una banda vertical que parte del centro de la imagen y abarca un 20% del ancho del roi. Se vana  usar para decidir en qué dirección girar dependiendo de si el centroide es menor o mayor a las delimitaciones:
+Se define una banda vertical que parte del centro de la imagen y abarca un 20% del ancho del roi. Se van a usar para decidir en qué dirección girar dependiendo de si el centroide es menor o mayor a las delimitaciones:
 
 ```python
 zona_central_min = int(roi_w * 0.40)
 zona_central_max = int(roi_w * 0.60)
 ```
 
-Se recorre cada objeto detectado dentro del trapesio y se filtran solo los objetos cuya esté entre los rangos previamente establecido al inicio del código:
+Se recorre cada objeto detectado dentro del trapecio y se filtran solo los objetos cuya area esté entre los rangos previamente establecidos al inicio del código:
 
 ```python
 for i in range(1, num_labels):
