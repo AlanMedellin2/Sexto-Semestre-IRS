@@ -217,3 +217,39 @@ morph = cv.erode(binary_masked, kernel, iterations=1)
 morph = cv.dilate(morph, kernel, iterations=1)
 ```
 
+### Momentos
+
+Los momentos de una imagen son promedios ponderados de las intenisdades de los pixeles. Para una imagen binarizada (píxeles 0 y 1), el momento de orden $(i, j)$ se define como:
+
+$$M_{ij} = \sum_{x,y} x^i y^j I(x,y)$$
+
+Esta fórmula es la base de la Estadística Espacial en imágenes ya que describe la distribución de los píxeles blancos en un plano cartesiano. Sus componentes son:
+* $\sum_{x,y}$: Significa que vamos a recorrer cada píxel de la imagen (o del ROI), fila por fila y columna por columna.
+* $x^i y^j$: Son las coordenadas del píxel elevadas a una potencia. Estas potencias ($i$ y $j$) determinan qué característica estamos calculando (el "orden" del momento).
+* $I(x,y)$: Es la Intensidad del píxel en esa posición.
+
+¿Qué significan los órdenes del momento?
+
+1) Si ponemos $i=0$ y $j=0$ obtenemos el área:
+
+$$M_{00} = \sum_{x,y} x^0 y^0 I(x,y) = \sum_{x,y} 1 \cdot 1 \cdot I(x,y)$$
+
+2) Si ponemos $i=01$ y $j=0$ o viceversa (momentos de primer orden) obtenemos la posición en cada coordenada:
+
+* $M_{10}$ ($i=1, j=0$): Suma las coordenadas $x$ de todos los píxeles blancos ($\sum x \cdot I(x,y)$).
+* $M_{01}$ ($i=0, j=1$): Suma las coordenadas $y$ de todos los píxeles blancos ($\sum y \cdot I(x,y)$).
+
+A partir de aquí se puede calcular el centroide (centro de masa) con los momentos de grado 0 y 1 con las siguiente fórmulas:
+
+$$\bar{x} = \frac{M_{10}}{M_{00}} \quad , \quad \bar{y} = \frac{M_{01}}{M_{00}}$$
+
+Cada una describe la posición del centroide en su eje respectivo. 
+
+El problema es que si aplicas "cv.moments()" a toda la imagen, el algoritmo no distingue entre objetos. Suma todos los píxeles blancos que encuentre. Suponiendo que tenemos una línea a detectar en el centro de nuestro trapecio y una mancha de ruido en una esquina, el cálculo te dará un centroide que está en medio del aire, entre la línea y el ruido. El Puzzlebot pensará que la línea está donde no hay nada y se saldrá de la pista.
+
+Por ello, vamos a calcular el centroide de otra manera
+
+### Centroide
+
+La función "cv.connectedComponentsWithStats()" 
+
