@@ -80,9 +80,9 @@ if __name__== "__main__":
             cutting = 160
 
 
-        #_, binary = cv.threshold(blurred,cutting, 255, cv.THRESH_BINARY_INV) # Original no adaptativo
+        _, binary = cv.threshold(blurred,cutting, 255, cv.THRESH_BINARY_INV) # Original no adaptativo
 
-        binary = cv.adaptiveThreshold(blurred, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY_INV, 151, 9) # <----- Mejora el seguimiento
+        #binary = cv.adaptiveThreshold(blurred, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY_INV, 151, 9) # <----- Mejora el seguimiento
 
         #Mascara trapezoidal, hacemos esto para quedarnos en una zona parecida a un carril
         top_width = int(roi_w * 0.6)
