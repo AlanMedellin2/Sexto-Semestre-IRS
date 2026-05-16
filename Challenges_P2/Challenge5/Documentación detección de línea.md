@@ -332,4 +332,61 @@ Y se dibuja una línea meramente estética entre el pixel más bajo del eje X de
 https://youtu.be/so3mA7U1VVE?si=nSfz9Z7a8siONj8k
 
 
+# Mejora ante el brillo
 
+Primero se importa una librería que nos permite utilizar colas de doble extremo. En este caso, vamos a crear una de 10 elementos:
+
+```python
+from collections import deque
+H_history = deque(maxlen=10)
+```
+
+Dentro de esta cola se van a almacenar 10 valores que serán promediados a manera de replicar un filtro de promedio móvil. Los datos que irán dentro, son el promedio del valor V (brillo) del formato HSV de una sección ROI que enfoca al centro de la línea. Decidí sumar y promediar solo la componente V del ROI porque es la que nos indica qué tan brillosa está la pista en ese momento, al menos el bloque delantero seguido al puzzlebot:
+
+```python
+H_roi = roi[int(roi_h*0.60):roi_h, int(roi_w*0.30):int(roi_w*0.70)]
+hsv_roi = cv.cvtColor(H_roi, cv.COLOR_BGR2HSV)    
+H_channel = hsv_roi[:, :, 2] #Toma solo H
+H_mean = np.mean(H_channel)
+H_history.append(H_mean) #Agrega ese valor a la cola
+H_mean_smooth = np.mean(H_history)
+print(H_mean_smooth)
+```
+
+El valor del brillo varía entre 0 - 255. A partir de estos rangos, hice pruebas a distintos niveles de brillo para determinar qué valor de corte necesita el filtro que binariza la imagen para detectar colores negros. De este modo, se adapta a diferentes niveles de brillo:
+
+```python
+ if H_mean_smooth < 110.00:
+            cutting = 100
+        elif H_mean_smooth >= 110.00 and H_mean_smooth < 135.0:
+            cutting = 140
+        elif H_mean_smooth >= 135.00 and H_mean_smooth < 150.0:
+            cutting = 140
+        elif H_mean_smooth >= 150.00 and H_mean_smooth < 155.0:
+            cutting = 115
+        elif H_mean_smooth >= 155.00 and H_mean_smooth < 165.0:
+            cutting = 120
+        elif H_mean_smooth >= 165.00 and H_mean_smooth < 170.0:
+            cutting = 125
+        elif H_mean_smooth >= 170.00 and H_mean_smooth < 190.0:
+            cutting = 130
+        elif H_mean_smooth >= 190.00 and H_mean_smooth < 200.0:
+            cutting = 140
+        elif H_mean_smooth >= 200.00:
+            cutting = 160
+
+
+        _, binary = cv.threshold(blurred,cutting, 255, cv.THRESH_BINARY_INV) # Original no adaptativo
+
+```
+
+Este método no es perfecto, ya que si el reflejo llega a opacar al color negro de la línea no se va a detectar de manera correcta aún con los umbrales del brillo calculados. Pero sí nos ayuda a enrobustecer la detección de línea de manera general en ambientes con luces de diferentes colores de iluminación. 
+
+Para una mejor detección de línea en brillos extremos se puede usar una función de OpenCV que modifica el umbral de corte de manera adaptativa a cada región de la imagen:
+
+
+
+```python
+binary = cv.adaptiveThreshold(blurred, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY_INV, 151, 9) # <----- Mejora el seguimiento
+
+```
