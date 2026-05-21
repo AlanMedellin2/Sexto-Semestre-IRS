@@ -48,3 +48,10 @@ Y se publican los cuaterniones:
 odom.pose.pose.orientation.z = math.sin(self.theta / 2.0)
 odom.pose.pose.orientation.w = math.cos(self.theta / 2.0)
 ```
+
+## Métricas: Obtuve un 5% de error entre el ground truth y la odometría del IMU. La idea es reducirlo utilizando un Extended Kalman Filter para fusionar la odometría del IMU con la de los encoders.
+
+
+<img width="719" height="122" alt="image" src="https://github.com/user-attachments/assets/30ce1071-8da2-4468-a119-e60152a7ed2b" />
+
+Izquierda es Ground_truth y derecha es odometría del IMU. Se aprecia una diferencia de 19° aprox (5%) de 360°
