@@ -38,3 +38,16 @@ Row-based selecting significa seleccionar una posición horizontal dentro de cad
 - **T ∈ R^(C×h×(w+1))** — Etiquetas objetivo
 - **Prob ∈ R^(C×h×w)** — Probabilidad de cada ubicación
 - **Loc ∈ R^(C×h)** — Ubicaciones de los carriles
+
+<img width="355" height="41" alt="image" src="https://github.com/user-attachments/assets/37b8ca42-376d-4dda-86c6-d15401f8596f" />
+
+para el carril i y la fila j, el clasificador f toma como entrada las características globales de la imagen, representadas por X, y genera una predicción P. Esa predicción es un vector que contiene la probabilidad de que el carril esté en cada celda horizontal de esa fila, esto responde al donde esta respecto a la linea horizontal.
+
+**Funcón de perdida de clasificación:**
+<img width="352" height="69" alt="image" src="https://github.com/user-attachments/assets/5979ae4f-82e2-442e-85a7-affe6d36ef3d" />
+
+esta fórmula significa que el modelo compara su predicción con la respuesta correcta para cada carril y para cada fila. La función LCE representa la cross entropy loss, que sirve para medir qué tan equivocada está la predicción del modelo respecto a la etiqueta real. Donde T representa la etiqueta correcta 
+
+Si la imagen tiene altura H y ancho W, entonces el costo está relacionado con H por W por C + 1, porque se analiza cada pixel y se decide si pertenece a algún carril o al fondo. En cambio, en el método propuesto, el costo está relacionado con C por h por w + 1, porque solo se hacen predicciones para ciertos carriles, ciertas filas y ciertas celdas.
+
+Esto es mucho más eficiente porque normalmente el número de row anchors h es mucho menor que la altura total H de la imagen, y el número de celdas w también es menor que el ancho total W. Por eso, el método puede ser mucho más rápido que una segmentación completa.
