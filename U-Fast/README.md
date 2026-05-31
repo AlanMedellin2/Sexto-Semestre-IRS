@@ -88,19 +88,3 @@ En el paper, los autores prueban diferentes cantidades de celdas y concluyen que
 Una ventaja importante de U-Fast es que utiliza características globales de la imagen. Esto significa que el modelo no depende únicamente de la información visual localizada justo encima del carril. En situaciones donde una línea está oculta o degradada, el modelo puede utilizar otras pistas de la escena, como la dirección del camino, la posición de otros carriles o la geometría general de la carretera.
 
 Esto ayuda a resolver el problema de **no-visual-clue**, ya que el modelo puede inferir la posición del carril aunque no todas sus partes sean visibles.
-
-## Conclusión
-
-U-Fast propone una forma más eficiente de detectar carriles al convertir el problema de segmentación pixel por pixel en un problema de selección por filas. Esta formulación reduce el costo computacional, permite trabajar en tiempo real y aprovecha mejor la estructura natural de los carriles.
-
-En lugar de preguntar “¿qué pixeles pertenecen al carril?”, el modelo pregunta “¿en qué posición horizontal aparece el carril en cada fila?”. Este cambio hace que el método sea más rápido, más simple y más adecuado para aplicaciones donde la velocidad es crítica, como vehículos autónomos, sistemas ADAS o robots móviles.
-
-
-
-1. <img width="730" height="203" alt="image" src="https://github.com/user-attachments/assets/76803215-d4c6-4deb-9161-74728413b41f" />
-2. ![Demo animada](https://miro.medium.com/v2/resize:fit:720/format:webp/1*CcUhYgdigwMkJ8ZsycolMA.gif)
-3. <img width="539" height="334" alt="Screenshot from 2026-05-31 02-14-33" src="https://github.com/user-attachments/assets/228c57b3-6208-41fd-a9b0-4e3c4d08ad70" />
-4. <img width="355" height="41" alt="image" src="https://github.com/user-attachments/assets/37b8ca42-376d-4dda-86c6-d15401f8596f" />
-5. <img width="352" height="69" alt="image" src="https://github.com/user-attachments/assets/5979ae4f-82e2-442e-85a7-affe6d36ef3d" />
-6. <img width="671" height="233" alt="image" src="https://github.com/user-attachments/assets/e387dcc7-c8b5-4c66-baf4-a0dccce8be24" />
-
