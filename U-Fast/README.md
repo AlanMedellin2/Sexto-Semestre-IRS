@@ -1,6 +1,6 @@
 Los detectores de línea han tenido un gran auge en esttos últimos años, el paper menciona que existen dos métodos principales, donde tenemos el procesamiento de imagen tradicional y métodos de segmentación profunda. Este último teniendo más peso en la actualidad por su gran representación y habilidad para aprender.
 
-Esta tecnología que contantemente es usada en la industría, necesita estar de la mano de un bajo costo computacional, también considerando que en estos sistemas se requiere de datos de entrada de la cámara o cámaras que pueden llegar a ser pesados en especal si se busca analizar el panorama en tiempo real, por lo que un pipeline rápido es escencial en lane detection. también se debe considerar el porblema de no-visual-clue, donde perturbaciones como la luz extrema pueden dificultar la lectura de las líneas.
+Esta tecnología que contantemente es usada en la industría, necesita estar de la mano de un bajo costo computacional, también considerando que en estos sistemas se requiere de datos de entrada de la cámara o cámaras que pueden llegar a ser pesados en especal si se busca analizar el panorama en tiempo real, por lo que un pipeline rápido es escencial en lane detection. también se debe considerar el porblema de no-visual-clue, donde no hay pistas visuales claras del carril, lo que puede dificultar la lectura de las líneas.
 
 U-Fast puede competir contra otros modélos como SAD, el cuál, trabaja como un método que busca veocidad pero al estar basado en segmentación, puede aumentar su costo computacional.
 
