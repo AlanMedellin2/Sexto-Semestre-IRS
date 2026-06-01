@@ -88,3 +88,5 @@ En el paper, los autores prueban diferentes cantidades de celdas y concluyen que
 Una ventaja importante de U-Fast es que utiliza características globales de la imagen. Esto significa que el modelo no depende únicamente de la información visual localizada justo encima del carril. En situaciones donde una línea está oculta o degradada, el modelo puede utilizar otras pistas de la escena, como la dirección del camino, la posición de otros carriles o la geometría general de la carretera.
 
 Esto ayuda a resolver el problema de **no-visual-clue**, ya que el modelo puede inferir la posición del carril aunque no todas sus partes sean visibles.
+
+De donde saque la info: https://arxiv.org/pdf/2004.11757
