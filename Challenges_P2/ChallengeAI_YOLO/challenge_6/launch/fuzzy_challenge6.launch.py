@@ -6,6 +6,7 @@ def generate_launch_description():
 
     return LaunchDescription([
 
+        # ── Detector de línea (sin cambios, igual que siempre) ────────────
         Node(
             package='challenge_6',
             executable='line_detector.py',
@@ -13,19 +14,20 @@ def generate_launch_description():
             output='screen'
         ),
 
+        # ── YOLO + área de señal (reemplaza yolo_decision_node.py) ────────
         Node(
             package='challenge_6',
-            executable='yolo_decision_node.py',
+            executable='yolo_double_detector_fuzzy.py',
             name='yolo_decision_node',
-            output='screen',
-            prefix='/home/ubuntu/ros2_ws/src/challenge_6/yolo_ros_env/bin/python'
+            output='screen'
         ),
 
+        # ── Controlador difuso (reemplaza line_follower.py) ───────────────
         Node(
             package='challenge_6',
-            executable='line_follower.py',
-            name='pid_controller',
+            executable='fuzzy_follower.py',
+            name='line_follower_pid',
             output='screen'
-        )
+        ),
 
     ])
