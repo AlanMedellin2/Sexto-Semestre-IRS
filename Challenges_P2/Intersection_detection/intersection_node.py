@@ -4,6 +4,7 @@ from rclpy.node import Node
 from sensor_msgs.msg import Image
 import cv2
 from cv_bridge import CvBridge, CvBridgeError
+from std_msgs.msg import Bool
 
 class ImageSubscriber(Node):
     def __init__(self):
@@ -16,6 +17,8 @@ class ImageSubscriber(Node):
             10 
         )
         self.subscription  
+
+        self.inter_pub = self.create_publisher(Bool, '/intersection_line', 10)
         
    
         self.bridge = CvBridge()
@@ -61,14 +64,17 @@ class ImageSubscriber(Node):
                     if zona_central_min <= cy <= zona_central_max:
                         contador_candidatos += 1
 
+            msg_interseccion = Bool()
+
             if contador_candidatos >= 4:
                 print("Interseccion")
-
-
-
-
-
-
+                msg_interseccion.data = True
+                self.get_logger().info("¡Intersección Detectada! Enviando True...")
+            else:
+                msg_interseccion.data = False
+            
+            # Se publica el estado en cada frame para mantener el tópico activo
+            self.inter_pub.publish(msg_interseccion)
 
                 
             if cv2.waitKey(1) & 0xFF == ord('q'):
