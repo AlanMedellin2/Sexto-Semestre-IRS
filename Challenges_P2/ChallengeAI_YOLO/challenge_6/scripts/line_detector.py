@@ -5,7 +5,7 @@ import numpy as np
 import rclpy
 
 from rclpy.node import Node
-from std_msgs.msg import Int32
+from std_msgs.msg import Int32, Bool
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 
@@ -15,31 +15,34 @@ class LineDetector(Node):
     def __init__(self):
         super().__init__('line_detector')
 
-        self.publisher_ = self.create_publisher(Int32, '/line_error', 10)
-        self.img_pub    = self.create_publisher(Image, '/camera/image', 10)
-        self.raw_pub    = self.create_publisher(Image, '/camera/raw',   10)
+        self.publisher_       = self.create_publisher(Int32, '/line_error',       10)
+        self.finish_pub       = self.create_publisher(Bool,  '/finish_line',       10)
+        self.intersection_pub = self.create_publisher(Bool,  '/intersection_line', 10)
+        self.img_pub          = self.create_publisher(Image, '/camera/image',      10)
+        self.raw_pub          = self.create_publisher(Image, '/camera/raw',        10)
 
         self.bridge = CvBridge()
 
-        self.cap = cv.VideoCapture('/dev/video2', cv.CAP_V4L2)
-
-        # Resolución baja para streaming fluido
+        self.cap = cv.VideoCapture('/dev/video0', cv.CAP_V4L2)
         self.cap.set(cv.CAP_PROP_FRAME_WIDTH,  320)
         self.cap.set(cv.CAP_PROP_FRAME_HEIGHT, 240)
-        self.cap.set(cv.CAP_PROP_FPS, 30)
+        self.cap.set(cv.CAP_PROP_FPS,          30)
+        self.cap.set(cv.CAP_PROP_BUFFERSIZE,   1)
 
         if not self.cap.isOpened():
-            self.get_logger().error("Cannot open camera /dev/video2")
+            self.get_logger().error("Cannot open camera /dev/video0")
             exit()
 
-        self.H_history    = deque(maxlen=10)
-        self.error_history = deque(maxlen=5)
-        self.last_error   = 0
+        self.H_history      = deque(maxlen=10)
+        self.error_history  = deque(maxlen=5)
+        self.last_error     = 0
+
+        # Anti-spam para intersección
+        self.intersection_cooldown = 0.0
 
         self.timer = self.create_timer(0.033, self.process_frame)
-        self.get_logger().info("LineDetector Hough 320x240 iniciado")
+        self.get_logger().info("LineDetector Hough iniciado")
 
-    # ------------------------------------------------------------------
     def get_threshold(self, H):
         if   H < 110: return 100
         elif H < 135: return 140
@@ -51,61 +54,122 @@ class LineDetector(Node):
         elif H < 200: return 140
         else:         return 160
 
-    # ------------------------------------------------------------------
+    def detect_finish_line(self, frame):
+        h, w = frame.shape[:2]
+        roi  = frame[int(h * 0.60):int(h * 0.80), int(w * 0.20):int(w * 0.80)]
+        hsv  = cv.cvtColor(roi, cv.COLOR_BGR2HSV)
+
+        y_mask = cv.inRange(hsv, np.array([18, 80, 80]),  np.array([35, 255, 255]))
+        b_mask = cv.inRange(hsv, np.array([0,  0,  0]),   np.array([180,255, 50]))
+
+        total  = roi.shape[0] * roi.shape[1]
+        yr     = cv.countNonZero(y_mask) / total
+        br     = cv.countNonZero(b_mask) / total
+
+        return yr > 0.12 and br > 0.10 and (yr + br) > 0.30
+
+    def detect_intersection(self, frame, now):
+        if now < self.intersection_cooldown:
+            return False
+
+        h, w = frame.shape[:2]
+        # Zona justo frente al robot — parte baja del frame
+        band = frame[int(h * 0.58):int(h * 0.70), int(w * 0.15):int(w * 0.85)]
+        gray = cv.cvtColor(band, cv.COLOR_BGR2GRAY)
+        _, bw  = cv.threshold(gray, 70, 255, cv.THRESH_BINARY_INV)
+
+        bh, bw_px = bw.shape
+
+        # Busca líneas horizontales con HoughLinesP
+        edges = cv.Canny(bw, 30, 100)
+        lines = cv.HoughLinesP(edges, 1, np.pi/180,
+                               threshold=15,
+                               minLineLength=int(bw_px * 0.08),
+                               maxLineGap=int(bw_px * 0.12))
+
+        if lines is None:
+            return False
+
+        # Filtra líneas casi horizontales (ángulo < 20°)
+        horizontal_lines = []
+        for l in lines:
+            x1, y1, x2, y2 = l[0]
+            angle = abs(np.degrees(np.arctan2(y2 - y1, x2 - x1)))
+            if angle < 20 or angle > 160:
+                horizontal_lines.append(l[0])
+
+        # La línea punteada tiene varios segmentos horizontales juntos
+        if len(horizontal_lines) >= 2:
+            self.intersection_cooldown = now + 5.0
+            return True
+        return False
+
     def process_frame(self):
         ret, frame = self.cap.read()
         if not ret:
             self.get_logger().warning("Cannot receive frame")
             return
 
-        h, w = frame.shape[:2]   # 240 x 320
+        import time
+        now = time.time()
 
-        # Publica frame crudo para YOLO (tamaño completo)
+        h, w = frame.shape[:2]
+
         self.raw_pub.publish(self.bridge.cv2_to_imgmsg(frame, encoding='bgr8'))
 
-        # ---- ROI: 65% inferior ------------------------------------
-        roi = frame[int(h * 0.65):h, :]
+        # ---- Finish line ----
+        finish = self.detect_finish_line(frame)
+        fm = Bool(); fm.data = finish
+        self.finish_pub.publish(fm)
+
+        # ---- Intersection line (línea punteada) ----
+        inter = self.detect_intersection(frame, now)
+        im = Bool(); im.data = inter
+        self.intersection_pub.publish(im)
+        if inter:
+            self.get_logger().info("INTERSECCIÓN detectada")
+
+        # ---- ROI muy baja y estrecha — solo sigue línea del centro ----
+        roi   = frame[int(h * 0.72):h, :]
         roi_h, roi_w = roi.shape[:2]
         debug = roi.copy()
 
-        # ---- Brillo adaptativo ------------------------------------
-        H_roi = roi[int(roi_h * 0.5):, int(roi_w * 0.3):int(roi_w * 0.7)]
-        hsv   = cv.cvtColor(H_roi, cv.COLOR_BGR2HSV)
-        H_mean = np.mean(hsv[:, :, 2])
+        H_roi    = roi[int(roi_h * 0.5):, int(roi_w * 0.3):int(roi_w * 0.7)]
+        hsv      = cv.cvtColor(H_roi, cv.COLOR_BGR2HSV)
+        H_mean   = np.mean(hsv[:, :, 2])
         self.H_history.append(H_mean)
         H_smooth = np.mean(self.H_history)
         cutting  = self.get_threshold(H_smooth)
 
-        # ---- Binarización -----------------------------------------
         gray    = cv.cvtColor(roi, cv.COLOR_BGR2GRAY)
         blurred = cv.GaussianBlur(gray, (5, 5), 0)
         _, binary = cv.threshold(blurred, cutting, 255, cv.THRESH_BINARY_INV)
 
-        # ---- Trapecio alargado centrado ---------------------------
-        top_w = int(roi_w * 0.20)
-        top_y = int(roi_h * 0.05)
-        trap  = np.array([[
-            ((roi_w - top_w) // 2, top_y),
-            ((roi_w + top_w) // 2, top_y),
-            (roi_w, roi_h),
-            (0,     roi_h)
+        # Trapecio estrecho centrado — ignora líneas de los costados
+        cx_roi   = roi_w // 2
+        top_half = int(roi_w * 0.12)   # ancho arriba
+        bot_half = int(roi_w * 0.28)   # ancho abajo
+        top_y    = int(roi_h * 0.05)
+        trap = np.array([[
+            (cx_roi - top_half, top_y),
+            (cx_roi + top_half, top_y),
+            (cx_roi + bot_half, roi_h),
+            (cx_roi - bot_half, roi_h)
         ]], dtype=np.int32)
 
-        mask = np.zeros((roi_h, roi_w), dtype=np.uint8)
+        mask   = np.zeros((roi_h, roi_w), dtype=np.uint8)
         cv.fillPoly(mask, trap, 255)
         masked = cv.bitwise_and(binary, binary, mask=mask)
 
-        # ---- Morfología -------------------------------------------
         k     = np.ones((3, 3), np.uint8)
         morph = cv.erode(masked, k, iterations=1)
         morph = cv.dilate(morph, k, iterations=2)
 
-        # ---- Hough ------------------------------------------------
         edges = cv.Canny(morph, 50, 150)
-        lines = cv.HoughLinesP(edges, 1, np.pi/180,
-                               threshold=25,
-                               minLineLength=20,
-                               maxLineGap=25)
+        lines = cv.HoughLinesP(edges, 1, np.pi / 180,
+                               threshold=18,
+                               minLineLength=12,
+                               maxLineGap=30)
 
         ref_x   = roi_w // 2
         error_x = self.last_error
@@ -117,20 +181,19 @@ class LineDetector(Node):
             valid = []
             for l in lines:
                 x1, y1, x2, y2 = l[0]
-                angle = abs(np.degrees(np.arctan2(y2-y1, x2-x1)))
+                angle = abs(np.degrees(np.arctan2(y2 - y1, x2 - x1)))
                 if 20 < angle < 160:
                     valid.append((x1, y1, x2, y2))
 
             if valid:
-                total_len  = 0.0
-                wx, wy     = 0.0, 0.0
+                total_len = 0.0
+                wx, wy    = 0.0, 0.0
                 for x1, y1, x2, y2 in valid:
-                    mx  = (x1+x2)/2.0
-                    my  = (y1+y2)/2.0
-                    seg = np.hypot(x2-x1, y2-y1)
-                    wx += mx*seg;  wy += my*seg
+                    seg = np.hypot(x2 - x1, y2 - y1)
+                    wx += (x1 + x2) / 2.0 * seg
+                    wy += (y1 + y2) / 2.0 * seg
                     total_len += seg
-                    cv.line(debug, (x1,y1), (x2,y2), (0,255,0), 1)
+                    cv.line(debug, (x1, y1), (x2, y2), (0, 255, 0), 1)
 
                 cx = wx / total_len
                 cy = wy / total_len
@@ -140,24 +203,30 @@ class LineDetector(Node):
                 error_x = int(np.mean(self.error_history))
                 self.last_error = error_x
 
-                cv.circle(debug, (int(cx), int(cy)), 5, (0,255,255), -1)
-                cv.line(debug, (ref_x, roi_h), (int(cx), int(cy)), (0,255,255), 1)
+                cv.circle(debug, (int(cx), int(cy)), 5, (0, 255, 255), -1)
+                cv.line(debug, (ref_x, roi_h), (int(cx), int(cy)), (0, 255, 255), 1)
         else:
-            cv.putText(debug, "Sin linea", (5, roi_h-5),
-                       cv.FONT_HERSHEY_SIMPLEX, 0.4, (0,0,255), 1)
+            cv.putText(debug, "Sin linea", (5, roi_h - 5),
+                       cv.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 255), 1)
 
-        msg = Int32()
-        msg.data = error_x
+        msg = Int32(); msg.data = error_x
         self.publisher_.publish(msg)
 
-        # HUD compacto
+        color = (0, 0, 255) if finish else (0, 255, 255)
         cv.putText(debug, f"E:{error_x}", (3, 15),
-                   cv.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,255), 1)
+                   cv.FONT_HERSHEY_SIMPLEX, 0.5, color, 1)
         cv.putText(debug, f"B:{H_smooth:.0f} C:{cutting}", (3, 30),
-                   cv.FONT_HERSHEY_SIMPLEX, 0.35, (255,255,255), 1)
+                   cv.FONT_HERSHEY_SIMPLEX, 0.35, (255, 255, 255), 1)
+        if inter:
+            cv.putText(debug, "INTER!", (ref_x - 25, roi_h // 2),
+                       cv.FONT_HERSHEY_SIMPLEX, 0.6, (0, 165, 255), 2)
+        if finish:
+            cv.putText(debug, "META!", (ref_x - 20, roi_h // 2),
+                       cv.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 
         self.get_logger().info(
-            f'Error: {error_x} | Brillo: {H_smooth:.1f} | Cutting: {cutting}')
+            f'E:{error_x} B:{H_smooth:.0f} C:{cutting} '
+            f'Inter:{inter} Finish:{finish}')
 
         self.img_pub.publish(self.bridge.cv2_to_imgmsg(debug, encoding='bgr8'))
 
