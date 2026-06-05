@@ -18,6 +18,7 @@ class LineDetector(Node):
 
         self.publisher_ = self.create_publisher(Int32, '/line_error', 10)
         self.img_pub    = self.create_publisher(Image, '/image_raw', 10)
+        self.img_pub    = self.create_publisher(Image, '/camera/line_ufast_h', 10)
         self.raw_pub    = self.create_publisher(Image, '/camera/raw',   10)
 
         self.bridge = CvBridge()
@@ -361,6 +362,7 @@ class LineDetector(Node):
         )
 
         self.img_pub.publish(self.bridge.cv2_to_imgmsg(debug, encoding='bgr8'))
+        self.line_ufast_h.publish(self.bridge.cv2_to_imgmsg(debug, encoding='bgr8'))
 
     def destroy_node(self):
         cv.destroyAllWindows()
