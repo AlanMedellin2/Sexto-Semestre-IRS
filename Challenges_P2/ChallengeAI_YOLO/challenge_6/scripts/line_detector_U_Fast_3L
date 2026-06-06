@@ -8,6 +8,7 @@ from rclpy.node import Node
 from std_msgs.msg import Int32
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
+from rclpy.qos import qos_profile_sensor_data
 
 
 class LineDetector(Node):
@@ -16,11 +17,13 @@ class LineDetector(Node):
         super().__init__('line_detector')
 
         self.publisher_ = self.create_publisher(Int32, '/line_error', 10)
-        self.img_pub    = self.create_publisher(Image, '/camera/image', 10)
+        self.img_pub    = self.create_publisher(Image, '/image_raw', 10)
+        self.line_ufast_h = self.create_publisher(Image, '/camera/line_ufast_h', 10)
         self.raw_pub    = self.create_publisher(Image, '/camera/raw',   10)
 
         self.bridge = CvBridge()
 
+        """
         self.cap = cv.VideoCapture('/dev/video0', cv.CAP_V4L2)
 
         # Resolución baja para streaming fluido
@@ -31,6 +34,7 @@ class LineDetector(Node):
         if not self.cap.isOpened():
             self.get_logger().error("Cannot open camera /dev/video2")
             exit()
+        """
 
         self.H_history    = deque(maxlen=10)
         self.error_history = deque(maxlen=5)
@@ -45,10 +49,17 @@ class LineDetector(Node):
         self.min_points_for_lane = 3
 
         self.last_lane_points = []
+        self.target_lane = "center"
         self.debug_windows = True
 
+    #   self.timer = self.create_timer(0.033, self.process_frame)
+        self.image_sub = self.create_subscription(
+        Image,
+        '/camera/raw',
+        self.image_callback,
+        qos_profile_sensor_data
+        )
 
-        self.timer = self.create_timer(0.033, self.process_frame)
         self.get_logger().info("LineDetector Hough 320x240 iniciado")
 
     # ------------------------------------------------------------------
@@ -64,19 +75,32 @@ class LineDetector(Node):
         else:         return 160
 
     # ------------------------------------------------------------------
-    def process_frame(self):
-        ret, frame = self.cap.read()
-        if not ret:
-            self.get_logger().warning("Cannot receive frame")
+    def image_callback(self, msg):
+        try:
+            frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
+        except Exception as e:
+            self.get_logger().error(f"Error convirtiendo imagen: {e}")
             return
 
-        h, w = frame.shape[:2]   # 240 x 320
+        self.process_frame(frame)
+    #-------------------------------------------------------------------
+    def process_frame(self, frame):
+         
+        h, w = frame.shape[:2]
 
-        # Publica frame crudo para YOLO (tamaño completo)
-        self.raw_pub.publish(self.bridge.cv2_to_imgmsg(frame, encoding='bgr8'))
+        # ---- ROI recortando arriba y abajo ------------------------
+        # y1 más pequeño = el ROI empieza más arriba
+        # y2 menor que h = recortas la parte más baja de la imagen
 
-        # ---- ROI: 65% inferior ------------------------------------
-        roi = frame[int(h * 0.10):h, :]
+        y1 = int(h * 0.20)   # empieza al 35% de la altura
+        y2 = int(h * 0.80)   # termina al 90%, recorta el 10% inferior
+
+        # Para ver todo el ancho:
+        x1 = 0
+        x2 = w
+
+        roi = frame[y1:y2, x1:x2]
+
         roi_h, roi_w = roi.shape[:2]
         debug = roi.copy()
 
@@ -86,7 +110,7 @@ class LineDetector(Node):
         V_mean = np.mean(hsv[:, :, 2])
         self.H_history.append(V_mean)
         V_smooth = np.mean(self.H_history)
-        cutting  = self.get_threshold(V_smooth)
+        cutting  = 105
 
         # ---- Binarización -----------------------------------------
         gray    = cv.cvtColor(roi, cv.COLOR_BGR2GRAY)
@@ -94,13 +118,18 @@ class LineDetector(Node):
         _, binary = cv.threshold(blurred, cutting, 255, cv.THRESH_BINARY_INV)
 
         # ---- Trapecio alargado centrado ---------------------------
-        top_w = int(roi_w * 0.100) #------------------------- PROBAR CON UN NÜMERO MÄS GRANDE
-        top_y = int(roi_h * 0.100)
-        trap  = np.array([[
-            ((roi_w - top_w) // 2, top_y),
-            ((roi_w + top_w) // 2, top_y),
-            (roi_w, roi_h),
-            (0,     roi_h)
+        top_w = int(roi_w * 0.90) #ancho
+        bottom_w = int(roi_w * 0.90) #forma del trapecio
+        top_y = int(roi_h * 0.40) #altura
+        bottom_y = roi_h
+
+        trap = np.array([[
+            (int(roi_w * 0.10), int(roi_h * 0.35)),
+            (int(roi_w * 0.80), int(roi_h * 0.35)),#punto 2
+            (int(roi_w * 0.98), int(roi_h * 0.60)), #punto 3
+            (int(roi_w * 0.99), int(roi_h * 0.95)),
+            (int(roi_w * 0.01), int(roi_h * 0.95)),
+            (int(roi_w * 0.01), int(roi_h * 0.50)) #punto 6
         ]], dtype=np.int32)
 
         mask = np.zeros((roi_h, roi_w), dtype=np.uint8)
@@ -108,21 +137,24 @@ class LineDetector(Node):
         masked = cv.bitwise_and(binary, binary, mask=mask)
 
         # ---- Morfología -------------------------------------------
-        k     = np.ones((3, 3), np.uint8)
-        morph = cv.erode(masked, k, iterations=1)
-        morph = cv.dilate(morph, k, iterations=2)
+# ---- Morfología -------------------------------------------
+        k_open = np.ones((3, 3), np.uint8)
+        morph = cv.morphologyEx(masked, cv.MORPH_OPEN, k_open, iterations=1)
+
+        k_close = np.ones((5, 3), np.uint8)
+        morph = cv.morphologyEx(morph, cv.MORPH_CLOSE, k_close, iterations=1)
 
         # ---- Hough ------------------------------------------------
-        """
+        #"""""
         edges = cv.Canny(morph, 50, 150)
         lines = cv.HoughLinesP(edges, 1, np.pi/180,
-                               threshold=25,
-                               minLineLength=20,
+                               threshold=125,
+                               minLineLength=1,
                                maxLineGap=25)
         
-
         ref_x   = roi_w // 2
         error_x = self.last_error
+        
 
         cv.polylines(debug, trap, True, (255, 0, 255), 1)
         cv.line(debug, (ref_x, 0), (ref_x, roi_h), (255, 0, 0), 1)
@@ -159,28 +191,30 @@ class LineDetector(Node):
         else:
             cv.putText(debug, "Sin linea", (5, roi_h-5),
                        cv.FONT_HERSHEY_SIMPLEX, 0.4, (0,0,255), 1)
-        """               
+                    
         #-----------Row anchors-------------------------------------------------------------
+
+                #----------- Row anchors para detectar 3 líneas -----------------------------
+        #""""" 
+        
+        # Bordes solo para debug
+        edges = cv.Canny(morph, 50, 150)
+
         ref_x = roi_w // 2
         error_x = self.last_error
+         
 
         # Debug visual base
         cv.polylines(debug, trap, True, (255, 0, 255), 1)
         cv.line(debug, (ref_x, 0), (ref_x, roi_h), (255, 0, 0), 1)
 
-        # Ya no se usan para Hough.
-        edges = cv.Canny(morph, 50, 150)
-
         row_anchors = np.linspace(
-            int(roi_h * 0.15),
-            roi_h - 5,
+            int(roi_h * 0.35),
+            int(roi_h * 0.95),
             self.num_row_anchors
         ).astype(int)
 
-        # Usamos el error anterior como referencia para evitar saltos bruscos
-        search_ref = ref_x + self.last_error
-
-        #Es donde vamos a tener los valores de cada línea
+        # Aquí guardamos todos los candidatos encontrados por fila
         three_candidates = []
 
         for y in row_anchors:
@@ -196,12 +230,15 @@ class LineDetector(Node):
 
             # Sumamos columnas activas dentro de la banda
             col_sum = np.sum(band > 0, axis=0)
-            active_cols = np.where(col_sum > 1)[0]
+
+            # Más estricto que col_sum > 1 para reducir ruido
+            min_pixels_in_col = int(self.band_height * 0.50)
+            active_cols = np.where(col_sum >= min_pixels_in_col)[0]
 
             if len(active_cols) == 0:
                 continue
 
-            # Separamos grupos de columnas continuas
+            # Separar grupos de columnas continuas
             splits = np.where(np.diff(active_cols) > 6)[0] + 1
             groups = np.split(active_cols, splits)
 
@@ -215,7 +252,6 @@ class LineDetector(Node):
                 x_max = int(g[-1])
                 width = x_max - x_min
 
-                # Evita manchas grandes como sombras o bloques de ruido
                 if width > self.max_candidate_width:
                     continue
 
@@ -225,15 +261,18 @@ class LineDetector(Node):
             if not candidates:
                 continue
 
-            # Por ahora seguimos el "candidato" más cercano a la posición de search_ref
+            # Guardamos TODOS los candidatos, no solo uno
             three_candidates.append((int(y), candidates))
 
+            # Dibujamos todos los candidatos detectados
             for cx_candidate in candidates:
                 cv.circle(debug, (cx_candidate, int(y)), 3, (0, 255, 255), -1)
 
-        self.right_line = []
+        # ---- Separar candidatos en izquierda, centro y derecha ----
+
         self.left_line = []
         self.center_line = []
+        self.right_line = []
 
         for y, candidates in three_candidates:
             for cx in candidates:
@@ -249,10 +288,19 @@ class LineDetector(Node):
                     self.right_line.append((cx, y))
                     cv.circle(debug, (cx, y), 4, (0, 0, 255), -1)
 
-        #nuestro objetivo es la línea del centro
-        target_points = self.center_line
+        # ---- Elegir qué línea seguir -------------------------------
 
-        # ---- Calcular error usando los puntos encontrados ----------
+        if self.target_lane == "left":
+            target_points = self.left_line
+
+        elif self.target_lane == "right":
+            target_points = self.right_line
+
+        else:
+            target_points = self.center_line
+
+        # ---- Calcular error usando la línea objetivo ---------------
+
         if len(target_points) >= self.min_points_for_lane:
             pts = np.array(target_points)
 
@@ -269,12 +317,12 @@ class LineDetector(Node):
             self.last_error = error_x
             self.last_lane_points = target_points
 
-            cv.circle(debug, (cx, cy), 6, (0, 255, 255), -1)
+            cv.circle(debug, (cx, cy), 7, (0, 255, 255), -1)
             cv.line(debug, (ref_x, roi_h), (cx, cy), (0, 255, 255), 1)
 
         else:
             error_x = self.last_error
-            cv.putText(debug, "Sin suficientes puntos", (5, roi_h - 5),
+            cv.putText(debug, f"Sin puntos en {self.target_lane}", (5, roi_h - 5),
                        cv.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 255), 1)
 
         # ---- Publicar error ---------------------------------------
@@ -289,32 +337,37 @@ class LineDetector(Node):
         cv.putText(debug, f"V:{V_smooth:.0f} C:{cutting}", (3, 30),
                    cv.FONT_HERSHEY_SIMPLEX, 0.35, (255, 255, 255), 1)
 
-        #En este punto ya contamos con tres líneas
-        cv.putText(debug, f"L:{len(self.left_line)} C:{len(self.center_line)} R:{len(self.right_line)}", (3, 45), 
-        cv.FONT_HERSHEY_SIMPLEX, 0.35, (255,255,255), 1)
+        cv.putText(debug, f"L:{len(self.left_line)} C:{len(self.center_line)} R:{len(self.right_line)}", 
+           (3, 45),
+           cv.FONT_HERSHEY_SIMPLEX, 0.35, (255, 255, 255), 1)
 
         # ---- Debug local con OpenCV -------------------------------
         if self.debug_windows:
             cv.imshow('1_frame_original', frame)
             cv.imshow('2_roi', roi)
+            #cv.imshow('3_binary', binary)
+            #cv.imshow('4_masked', masked)
+            cv.imshow('5_morph', morph)
             cv.imshow('6_edges', edges)
             cv.imshow('7_debug_final', debug)
 
             key = cv.waitKey(1) & 0xFF
             if key == ord('q'):
                 self.get_logger().info("Cerrando por tecla q")
-                rclpy.shutdown()
+                if rclpy.ok():
+                    rclpy.shutdown()
 
         self.get_logger().info(
-                f'Error: {error_x} | Brillo: {V_smooth:.1f} | Cutting: {cutting} | '
-                f'L:{len(self.left_line)} C:{len(self.center_line)} R:{len(self.right_line)}'
+            f'Error: {error_x} | Brillo: {V_smooth:.1f} | Cutting: {cutting} | '
+            f'L:{len(self.left_line)} C:{len(self.center_line)} R:{len(self.right_line)} | '
+            f'Objetivo:{self.target_lane}'
         )
 
         self.img_pub.publish(self.bridge.cv2_to_imgmsg(debug, encoding='bgr8'))
+        self.line_ufast_h.publish(self.bridge.cv2_to_imgmsg(debug, encoding='bgr8'))
 
     def destroy_node(self):
-        if self.cap.isOpened():
-            self.cap.release()
+        cv.destroyAllWindows()
         super().destroy_node()
 
 
