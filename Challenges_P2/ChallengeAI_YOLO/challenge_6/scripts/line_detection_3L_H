@@ -18,7 +18,7 @@ class LineDetector(Node):
 
         self.publisher_ = self.create_publisher(Int32, '/line_error', 10)
         self.img_pub    = self.create_publisher(Image, '/image_raw', 10)
-        self.img_pub    = self.create_publisher(Image, '/camera/line_ufast_h', 10)
+        self.line_ufast_h = self.create_publisher(Image, '/camera/line_ufast_h', 10)
         self.raw_pub    = self.create_publisher(Image, '/camera/raw',   10)
 
         self.bridge = CvBridge()
@@ -123,11 +123,13 @@ class LineDetector(Node):
         top_y = int(roi_h * 0.40) #altura
         bottom_y = roi_h
 
-        trap  = np.array([[
-            ((roi_w - top_w) //2, top_y),        #arriba iz
-            ((roi_w + top_w)// 2, top_y),        #arriba der
-            ((roi_w + bottom_w)// 2, bottom_y),  #abajo der
-            ((roi_w - bottom_w)//2, bottom_y ) #abajo izquierda
+        trap = np.array([[
+            (int(roi_w * 0.10), int(roi_h * 0.35)),
+            (int(roi_w * 0.80), int(roi_h * 0.35)),#punto 2
+            (int(roi_w * 0.98), int(roi_h * 0.60)), #punto 3
+            (int(roi_w * 0.99), int(roi_h * 0.95)),
+            (int(roi_w * 0.01), int(roi_h * 0.95)),
+            (int(roi_w * 0.01), int(roi_h * 0.50)) #punto 6
         ]], dtype=np.int32)
 
         mask = np.zeros((roi_h, roi_w), dtype=np.uint8)
@@ -146,8 +148,8 @@ class LineDetector(Node):
         #"""""
         edges = cv.Canny(morph, 50, 150)
         lines = cv.HoughLinesP(edges, 1, np.pi/180,
-                               threshold=70,
-                               minLineLength=20,
+                               threshold=125,
+                               minLineLength=1,
                                maxLineGap=25)
         
         ref_x   = roi_w // 2
