@@ -1,0 +1,34 @@
+[0.032s] Invoking command in '/home/ubuntu/ros2_ws/src/kalman_filter_ws/build/extended_kalman_filter': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/ubuntu/ros2_ws/src/kalman_filter_ws/build/extended_kalman_filter -- -j8 -l8
+[0.242s] Invoked command in '/home/ubuntu/ros2_ws/src/kalman_filter_ws/build/extended_kalman_filter' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/ubuntu/ros2_ws/src/kalman_filter_ws/build/extended_kalman_filter -- -j8 -l8
+[0.271s] Invoking command in '/home/ubuntu/ros2_ws/src/kalman_filter_ws/build/extended_kalman_filter': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/ubuntu/ros2_ws/src/kalman_filter_ws/build/extended_kalman_filter
+[0.283s] -- Install configuration: ""
+[0.287s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter//launch
+[0.288s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter//launch/launcher.launch.py
+[0.289s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter//src
+[0.291s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter//scripts
+[0.293s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter//scripts/rotate_node.py
+[0.294s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter//scripts/node_extra.py
+[0.296s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter//scripts/node_odometry.py
+[0.298s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter//scripts/closed_loop_ctrl.py
+[0.301s] -- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter//scripts/error.py
+[0.306s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/lib/extended_kalman_filter/node_extra.py
+[0.308s] -- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/lib/extended_kalman_filter/error.py
+[0.309s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/lib/extended_kalman_filter/rotate_node.py
+[0.311s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/lib/extended_kalman_filter/node_odometry.py
+[0.313s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/lib/extended_kalman_filter/closed_loop_ctrl.py
+[0.316s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/ament_index/resource_index/package_run_dependencies/extended_kalman_filter
+[0.318s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/ament_index/resource_index/parent_prefix_path/extended_kalman_filter
+[0.321s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/environment/ament_prefix_path.sh
+[0.323s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/environment/ament_prefix_path.dsv
+[0.325s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/environment/path.sh
+[0.326s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/environment/path.dsv
+[0.328s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/local_setup.bash
+[0.330s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/local_setup.sh
+[0.331s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/local_setup.zsh
+[0.333s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/local_setup.dsv
+[0.335s] -- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/package.dsv
+[0.337s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/ament_index/resource_index/packages/extended_kalman_filter
+[0.338s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/cmake/extended_kalman_filterConfig.cmake
+[0.340s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/cmake/extended_kalman_filterConfig-version.cmake
+[0.341s] -- Up-to-date: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/package.xml
+[0.343s] Invoked command in '/home/ubuntu/ros2_ws/src/kalman_filter_ws/build/extended_kalman_filter' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/ubuntu/ros2_ws/src/kalman_filter_ws/build/extended_kalman_filter

@@ -1,0 +1,26 @@
+[0.025s] Invoking command in '/home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader -- -j8 -l8
+[0.168s] Invoked command in '/home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader -- -j8 -l8
+[0.189s] Invoking command in '/home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader
+[0.204s] -- Install configuration: ""
+[0.206s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader//scripts
+[0.208s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader//scripts/varianza_imu.py
+[0.210s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader//scripts/MPU6050.py
+[0.212s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader//src
+[0.214s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/lib/MPU6050_reader/MPU6050.py
+[0.215s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/lib/MPU6050_reader/varianza_imu.py
+[0.219s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/ament_index/resource_index/package_run_dependencies/MPU6050_reader
+[0.222s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/ament_index/resource_index/parent_prefix_path/MPU6050_reader
+[0.224s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/environment/ament_prefix_path.sh
+[0.226s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/environment/ament_prefix_path.dsv
+[0.227s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/environment/path.sh
+[0.230s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/environment/path.dsv
+[0.232s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/local_setup.bash
+[0.233s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/local_setup.sh
+[0.236s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/local_setup.zsh
+[0.238s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/local_setup.dsv
+[0.240s] -- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/package.dsv
+[0.242s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/ament_index/resource_index/packages/MPU6050_reader
+[0.244s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/cmake/MPU6050_readerConfig.cmake
+[0.246s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/cmake/MPU6050_readerConfig-version.cmake
+[0.248s] -- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/package.xml
+[0.250s] Invoked command in '/home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader

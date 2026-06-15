@@ -1,0 +1,117 @@
+[0.000000] (-) TimerEvent: {}
+[0.000512] (MPU6050_reader) JobQueued: {'identifier': 'MPU6050_reader', 'dependencies': OrderedDict()}
+[0.000679] (MPU6050_reader) JobStarted: {'identifier': 'MPU6050_reader'}
+[0.016102] (MPU6050_reader) JobProgress: {'identifier': 'MPU6050_reader', 'progress': 'cmake'}
+[0.017456] (MPU6050_reader) Command: {'cmd': ['/usr/bin/cmake', '/home/ubuntu/ros2_ws/src/MPU6050/src/MPU6050_reader', '-DCMAKE_INSTALL_PREFIX=/home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader'], 'cwd': '/home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'ubuntu', 'SSH_CLIENT': '10.127.62.226 52646 22', 'LC_TIME': 'C.UTF-8', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/ubuntu', 'OLDPWD': '/home/ubuntu/ros2_ws/src/MPU6050/src', 'SSH_TTY': '/dev/pts/2', 'ROS_PYTHON_VERSION': '3', 'LC_MONETARY': 'C.UTF-8', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLCON_PREFIX_PATH': '/home/ubuntu/microros_ws/install', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'ubuntu', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '8', 'PATH': '/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'VK_ICD_FILENAMES': '/usr/share/vulkan/icd.d/adrenovk.json', 'LC_ADDRESS': 'C.UTF-8', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': 'localhost:12.0', 'LANG': 'C.UTF-8', 'LC_TELEPHONE': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'LC_NAME': 'C.UTF-8', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'LC_MEASUREMENT': 'C.UTF-8', 'LC_IDENTIFICATION': 'C.UTF-8', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader', 'QT_QPA_PLATFORM': 'wayland', 'SSH_CONNECTION': '10.127.62.226 52646 10.127.62.114 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'LC_NUMERIC': 'C.UTF-8', 'LC_PAPER': 'C.UTF-8', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[0.099040] (-) TimerEvent: {}
+[0.200355] (-) TimerEvent: {}
+[0.301509] (-) TimerEvent: {}
+[0.402512] (-) TimerEvent: {}
+[0.503565] (-) TimerEvent: {}
+[0.505382] (MPU6050_reader) StdoutLine: {'line': b'-- The C compiler identification is GNU 13.3.0\n'}
+[0.603895] (-) TimerEvent: {}
+[0.705287] (-) TimerEvent: {}
+[0.806678] (-) TimerEvent: {}
+[0.907750] (-) TimerEvent: {}
+[0.928382] (MPU6050_reader) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 13.3.0\n'}
+[1.008090] (-) TimerEvent: {}
+[1.033150] (MPU6050_reader) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[1.108590] (-) TimerEvent: {}
+[1.210001] (-) TimerEvent: {}
+[1.311166] (-) TimerEvent: {}
+[1.335669] (MPU6050_reader) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[1.411114] (MPU6050_reader) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[1.412692] (-) TimerEvent: {}
+[1.416599] (MPU6050_reader) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[1.418207] (MPU6050_reader) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[1.450532] (MPU6050_reader) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[1.513074] (-) TimerEvent: {}
+[1.614208] (-) TimerEvent: {}
+[1.716200] (-) TimerEvent: {}
+[1.745379] (MPU6050_reader) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.816727] (-) TimerEvent: {}
+[1.819347] (MPU6050_reader) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.821511] (MPU6050_reader) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.822711] (MPU6050_reader) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.843277] (MPU6050_reader) StdoutLine: {'line': b'-- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)\n'}
+[1.917363] (-) TimerEvent: {}
+[2.018924] (-) TimerEvent: {}
+[2.120288] (-) TimerEvent: {}
+[2.134611] (MPU6050_reader) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter \n'}
+[2.220944] (-) TimerEvent: {}
+[2.322311] (-) TimerEvent: {}
+[2.423776] (-) TimerEvent: {}
+[2.524794] (-) TimerEvent: {}
+[2.567233] (MPU6050_reader) StdoutLine: {'line': b'-- Found rclcpp: 28.1.18 (/opt/ros/jazzy/share/rclcpp/cmake)\n'}
+[2.625097] (-) TimerEvent: {}
+[2.726073] (-) TimerEvent: {}
+[2.761206] (MPU6050_reader) StdoutLine: {'line': b'-- Found rosidl_generator_c: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)\n'}
+[2.812742] (MPU6050_reader) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)\n'}
+[2.826555] (-) TimerEvent: {}
+[2.894645] (MPU6050_reader) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[2.927138] (-) TimerEvent: {}
+[2.966538] (MPU6050_reader) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[3.027487] (-) TimerEvent: {}
+[3.129106] (-) TimerEvent: {}
+[3.216343] (MPU6050_reader) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)\n'}
+[3.227152] (MPU6050_reader) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)\n'}
+[3.229297] (-) TimerEvent: {}
+[3.330389] (-) TimerEvent: {}
+[3.431878] (-) TimerEvent: {}
+[3.524374] (MPU6050_reader) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.13")  \n'}
+[3.531987] (-) TimerEvent: {}
+[3.605624] (MPU6050_reader) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") \n'}
+[3.632654] (-) TimerEvent: {}
+[3.664210] (MPU6050_reader) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[3.733048] (-) TimerEvent: {}
+[3.834315] (-) TimerEvent: {}
+[3.918447] (MPU6050_reader) StdoutLine: {'line': b'-- Found rclpy: 7.1.11 (/opt/ros/jazzy/share/rclpy/cmake)\n'}
+[3.925627] (MPU6050_reader) StdoutLine: {'line': b'-- Found sensor_msgs: 5.3.7 (/opt/ros/jazzy/share/sensor_msgs/cmake)\n'}
+[3.934561] (-) TimerEvent: {}
+[4.035705] (-) TimerEvent: {}
+[4.113600] (MPU6050_reader) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.17.5 (/opt/ros/jazzy/share/ament_lint_auto/cmake)\n'}
+[4.136277] (-) TimerEvent: {}
+[4.224877] (MPU6050_reader) StderrLine: {'line': b'WARNING: Package name "MPU6050_reader" does not follow the naming conventions. It should start with a lower case letter and only contain lower case letters, digits, underscores, and dashes.\n'}
+[4.236603] (-) TimerEvent: {}
+[4.338027] (-) TimerEvent: {}
+[4.390988] (MPU6050_reader) StdoutLine: {'line': b"-- Added test 'flake8' to check Python code syntax and style conventions\n"}
+[4.391891] (MPU6050_reader) StdoutLine: {'line': b"-- Configured 'flake8' exclude dirs and/or files: \n"}
+[4.395255] (MPU6050_reader) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[4.399292] (MPU6050_reader) StdoutLine: {'line': b"-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257\n"}
+[4.406875] (MPU6050_reader) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[4.415983] (MPU6050_reader) StdoutLine: {'line': b'-- Configuring done (4.3s)\n'}
+[4.438292] (-) TimerEvent: {}
+[4.439779] (MPU6050_reader) StdoutLine: {'line': b'-- Generating done (0.0s)\n'}
+[4.445608] (MPU6050_reader) StdoutLine: {'line': b'-- Build files have been written to: /home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader\n'}
+[4.465442] (MPU6050_reader) CommandEnded: {'returncode': 0}
+[4.468451] (MPU6050_reader) JobProgress: {'identifier': 'MPU6050_reader', 'progress': 'build'}
+[4.468587] (MPU6050_reader) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader', '--', '-j8', '-l8'], 'cwd': '/home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'ubuntu', 'SSH_CLIENT': '10.127.62.226 52646 22', 'LC_TIME': 'C.UTF-8', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/ubuntu', 'OLDPWD': '/home/ubuntu/ros2_ws/src/MPU6050/src', 'SSH_TTY': '/dev/pts/2', 'ROS_PYTHON_VERSION': '3', 'LC_MONETARY': 'C.UTF-8', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLCON_PREFIX_PATH': '/home/ubuntu/microros_ws/install', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'ubuntu', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '8', 'PATH': '/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'VK_ICD_FILENAMES': '/usr/share/vulkan/icd.d/adrenovk.json', 'LC_ADDRESS': 'C.UTF-8', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': 'localhost:12.0', 'LANG': 'C.UTF-8', 'LC_TELEPHONE': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'LC_NAME': 'C.UTF-8', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'LC_MEASUREMENT': 'C.UTF-8', 'LC_IDENTIFICATION': 'C.UTF-8', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader', 'QT_QPA_PLATFORM': 'wayland', 'SSH_CONNECTION': '10.127.62.226 52646 10.127.62.114 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'LC_NUMERIC': 'C.UTF-8', 'LC_PAPER': 'C.UTF-8', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[4.538665] (-) TimerEvent: {}
+[4.578747] (MPU6050_reader) CommandEnded: {'returncode': 0}
+[4.584197] (MPU6050_reader) JobProgress: {'identifier': 'MPU6050_reader', 'progress': 'install'}
+[4.606045] (MPU6050_reader) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader'], 'cwd': '/home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'ubuntu', 'SSH_CLIENT': '10.127.62.226 52646 22', 'LC_TIME': 'C.UTF-8', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/ubuntu', 'OLDPWD': '/home/ubuntu/ros2_ws/src/MPU6050/src', 'SSH_TTY': '/dev/pts/2', 'ROS_PYTHON_VERSION': '3', 'LC_MONETARY': 'C.UTF-8', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLCON_PREFIX_PATH': '/home/ubuntu/microros_ws/install', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'ubuntu', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '8', 'PATH': '/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'VK_ICD_FILENAMES': '/usr/share/vulkan/icd.d/adrenovk.json', 'LC_ADDRESS': 'C.UTF-8', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': 'localhost:12.0', 'LANG': 'C.UTF-8', 'LC_TELEPHONE': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'LC_NAME': 'C.UTF-8', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'LC_MEASUREMENT': 'C.UTF-8', 'LC_IDENTIFICATION': 'C.UTF-8', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader', 'QT_QPA_PLATFORM': 'wayland', 'SSH_CONNECTION': '10.127.62.226 52646 10.127.62.114 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'LC_NUMERIC': 'C.UTF-8', 'LC_PAPER': 'C.UTF-8', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[4.638429] (MPU6050_reader) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[4.640271] (-) TimerEvent: {}
+[4.641351] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader//scripts\n'}
+[4.643922] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader//scripts/MPU6050.py\n'}
+[4.645438] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader//src\n'}
+[4.646616] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/lib/MPU6050_reader/MPU6050.py\n'}
+[4.648437] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/ament_index/resource_index/package_run_dependencies/MPU6050_reader\n'}
+[4.651298] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/ament_index/resource_index/parent_prefix_path/MPU6050_reader\n'}
+[4.656460] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/environment/ament_prefix_path.sh\n'}
+[4.658224] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/environment/ament_prefix_path.dsv\n'}
+[4.659616] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/environment/path.sh\n'}
+[4.661670] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/environment/path.dsv\n'}
+[4.663607] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/local_setup.bash\n'}
+[4.666911] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/local_setup.sh\n'}
+[4.668243] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/local_setup.zsh\n'}
+[4.671141] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/local_setup.dsv\n'}
+[4.673440] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/package.dsv\n'}
+[4.675091] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/ament_index/resource_index/packages/MPU6050_reader\n'}
+[4.676703] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/cmake/MPU6050_readerConfig.cmake\n'}
+[4.678154] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/cmake/MPU6050_readerConfig-version.cmake\n'}
+[4.680171] (MPU6050_reader) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/package.xml\n'}
+[4.681518] (MPU6050_reader) CommandEnded: {'returncode': 0}
+[4.741486] (-) TimerEvent: {}
+[4.828243] (MPU6050_reader) JobEnded: {'identifier': 'MPU6050_reader', 'rc': 0}
+[4.831871] (-) EventReactorShutdown: {}

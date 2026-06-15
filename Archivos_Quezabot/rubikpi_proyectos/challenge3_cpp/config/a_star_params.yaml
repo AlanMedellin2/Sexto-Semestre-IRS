@@ -1,0 +1,8 @@
+a_star_goals_publisher:
+  ros__parameters:
+
+    start_row: 0
+    start_col: 3
+
+    goal_row: 3
+    goal_col: 0

@@ -1,0 +1,4 @@
+Invoking command in '/home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader -- -j8 -l8
+Invoked command in '/home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader -- -j8 -l8
+Invoking command in '/home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader
+Invoked command in '/home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/ubuntu/ros2_ws/src/MPU6050/build/MPU6050_reader

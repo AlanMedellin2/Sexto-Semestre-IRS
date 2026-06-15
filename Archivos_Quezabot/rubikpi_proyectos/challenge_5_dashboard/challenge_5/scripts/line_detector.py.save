@@ -1,0 +1,156 @@
+#!/usr/bin/env python3
+import cv2 as cv
+import numpy as np
+
+import rclpy
+from rclpy.node import Node
+
+from std_msgs.msg import Int32
+
+
+class LineDetector(Node):
+
+    def __init__(self):
+        super().__init__('line_detector')
+
+        # Publisher
+        self.publisher_ = self.create_publisher(
+            Int32,
+            '/line_error',
+            10
+        )
+
+        # Cámara
+        self.cap = cv.VideoCapture('/dev/video0')
+
+        self.Area_min = 200
+        self.Area_max = 20000
+
+        if not self.cap.isOpened():
+            self.get_logger().error("Cannot open camera")
+            exit()
+
+        # Timer
+        self.timer = self.create_timer(0.03, self.process_frame)
+
+    def process_frame(self):
+
+        ret, originalFr = self.cap.read()
+
+        if not ret:
+            self.get_logger().warning("Cannot receive frame")
+            return
+
+        # ROI
+	h, w = originalFr.shape[:2]
+	self.get_logger().info(f"Frame OK: {w}x{h}")
+
+        roi = originalFr[int(h*0.6):h, :]	
+        roi_h, roi_w = roi.shape[:2]
+
+        # Gris
+        gris_image = cv.cvtColor(roi, cv.COLOR_BGR2GRAY)
+
+        # Blur
+        blurred = cv.GaussianBlur(gris_image, (5, 5), 0)
+
+        # Threshold
+        _, binary = cv.threshold(
+            blurred,
+            80,
+            255,
+            cv.THRESH_BINARY_INV
+        )
+
+        # Trapecio
+        top_width = int(roi_w * 0.6)
+        top_y = int(roi_h * 0.3)
+
+        trapezoid = np.array([[
+            ((roi_w - top_width) // 2, top_y),
+            ((roi_w + top_width) // 2, top_y),
+            (roi_w, roi_h),
+            (0, roi_h)
+        ]], dtype=np.int32)
+
+        mask = np.zeros((roi_h, roi_w), dtype=np.uint8)
+
+        cv.fillPoly(mask, trapezoid, 255)
+
+        binary_masked = cv.bitwise_and(
+            binary,
+            binary,
+            mask=mask
+        )
+
+        # Morfología
+        kernel = np.ones((3,3), np.uint8)
+
+        morph = cv.erode(binary_masked, kernel, iterations=1)
+        morph = cv.dilate(morph, kernel, iterations=1)
+
+        # Componentes conectados
+        num_labels, labels, stats, centroids = \
+            cv.connectedComponentsWithStats(
+                morph,
+                connectivity=8
+            )
+
+        ref_x = roi_w // 2
+
+        candidatos = []
+
+        for i in range(1, num_labels):
+
+            x, y, bw, bh, area = stats[i]
+            cx, cy = centroids[i]
+	    self.get_logger().info(f"  Comp {i}: área={area}, cx={cx:.1f}")
+
+            if self.Area_min <= area <= self.Area_max:
+                candidatos.append((cx, cy))
+
+        if len(candidatos) > 0:
+
+            cx, cy = min(
+                candidatos,
+                key=lambda p: abs(p[0] - ref_x)
+            )
+
+            error_x = int(cx - ref_x)
+
+            # Crear mensaje
+            msg = Int32()
+
+            # Guardar dato
+            msg.data = error_x
+
+            # Publicar
+            self.publisher_.publish(msg)
+
+            self.get_logger().info(
+                f'Error publicado: {error_x}'
+            )
+
+        cv.imshow("morph", morph)
+
+        if cv.waitKey(1) == 27:
+            self.cap.release()
+            cv.destroyAllWindows()
+            rclpy.shutdown()
+
+
+def main(args=None):
+
+    rclpy.init(args=args)
+
+    node = LineDetector()
+
+    rclpy.spin(node)
+
+    node.destroy_node()
+
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()

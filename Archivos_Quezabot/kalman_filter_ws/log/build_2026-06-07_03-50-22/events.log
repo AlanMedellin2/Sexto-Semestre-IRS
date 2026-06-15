@@ -1,0 +1,128 @@
+[0.000000] (-) TimerEvent: {}
+[0.000561] (extended_kalman_filter) JobQueued: {'identifier': 'extended_kalman_filter', 'dependencies': OrderedDict()}
+[0.000717] (extended_kalman_filter) JobStarted: {'identifier': 'extended_kalman_filter'}
+[0.023953] (extended_kalman_filter) JobProgress: {'identifier': 'extended_kalman_filter', 'progress': 'cmake'}
+[0.025174] (extended_kalman_filter) Command: {'cmd': ['/usr/bin/cmake', '/home/ubuntu/ros2_ws/src/kalman_filter_ws/src/extended_kalman_filter', '-DCMAKE_INSTALL_PREFIX=/home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter'], 'cwd': '/home/ubuntu/ros2_ws/src/kalman_filter_ws/build/extended_kalman_filter', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'ubuntu', 'SSH_CLIENT': '192.168.0.12 40174 22', 'LC_TIME': 'C.UTF-8', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/ubuntu', 'OLDPWD': '/home/ubuntu/ros2_ws/src/kalman_filter_ws/src', 'SSH_TTY': '/dev/pts/0', 'ROS_PYTHON_VERSION': '3', 'LC_MONETARY': 'C.UTF-8', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLCON_PREFIX_PATH': '/home/ubuntu/microros_ws/install', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'ubuntu', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '4', 'PATH': '/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'VK_ICD_FILENAMES': '/usr/share/vulkan/icd.d/adrenovk.json', 'LC_ADDRESS': 'C.UTF-8', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': 'localhost:10.0', 'LANG': 'C.UTF-8', 'LC_TELEPHONE': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'LC_NAME': 'C.UTF-8', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'LC_MEASUREMENT': 'C.UTF-8', 'LC_IDENTIFICATION': 'C.UTF-8', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/ubuntu/ros2_ws/src/kalman_filter_ws/build/extended_kalman_filter', 'QT_QPA_PLATFORM': 'wayland', 'SSH_CONNECTION': '192.168.0.12 40174 192.168.0.14 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'LC_NUMERIC': 'C.UTF-8', 'LC_PAPER': 'C.UTF-8', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[0.098742] (-) TimerEvent: {}
+[0.199830] (-) TimerEvent: {}
+[0.301081] (-) TimerEvent: {}
+[0.402512] (-) TimerEvent: {}
+[0.503668] (-) TimerEvent: {}
+[0.517159] (extended_kalman_filter) StdoutLine: {'line': b'-- The C compiler identification is GNU 13.3.0\n'}
+[0.603941] (-) TimerEvent: {}
+[0.704949] (-) TimerEvent: {}
+[0.806183] (-) TimerEvent: {}
+[0.882444] (extended_kalman_filter) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 13.3.0\n'}
+[0.906218] (-) TimerEvent: {}
+[0.985593] (extended_kalman_filter) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[1.006593] (-) TimerEvent: {}
+[1.107644] (-) TimerEvent: {}
+[1.208675] (-) TimerEvent: {}
+[1.309641] (-) TimerEvent: {}
+[1.311156] (extended_kalman_filter) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[1.386481] (extended_kalman_filter) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[1.390217] (extended_kalman_filter) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[1.392555] (extended_kalman_filter) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[1.409935] (-) TimerEvent: {}
+[1.423628] (extended_kalman_filter) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[1.510502] (-) TimerEvent: {}
+[1.612413] (-) TimerEvent: {}
+[1.675233] (extended_kalman_filter) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.713238] (-) TimerEvent: {}
+[1.749559] (extended_kalman_filter) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.751572] (extended_kalman_filter) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.752798] (extended_kalman_filter) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.776075] (extended_kalman_filter) StdoutLine: {'line': b'-- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)\n'}
+[1.813460] (-) TimerEvent: {}
+[1.914565] (-) TimerEvent: {}
+[2.015933] (-) TimerEvent: {}
+[2.117221] (-) TimerEvent: {}
+[2.125418] (extended_kalman_filter) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter \n'}
+[2.217538] (-) TimerEvent: {}
+[2.318835] (-) TimerEvent: {}
+[2.420257] (-) TimerEvent: {}
+[2.521720] (-) TimerEvent: {}
+[2.602428] (extended_kalman_filter) StdoutLine: {'line': b'-- Found rclcpp: 28.1.18 (/opt/ros/jazzy/share/rclcpp/cmake)\n'}
+[2.621921] (-) TimerEvent: {}
+[2.722811] (-) TimerEvent: {}
+[2.806478] (extended_kalman_filter) StdoutLine: {'line': b'-- Found rosidl_generator_c: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)\n'}
+[2.822933] (-) TimerEvent: {}
+[2.865229] (extended_kalman_filter) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)\n'}
+[2.923420] (-) TimerEvent: {}
+[2.944169] (extended_kalman_filter) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[3.023737] (-) TimerEvent: {}
+[3.029372] (extended_kalman_filter) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[3.123971] (-) TimerEvent: {}
+[3.225113] (-) TimerEvent: {}
+[3.308791] (extended_kalman_filter) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)\n'}
+[3.323256] (extended_kalman_filter) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)\n'}
+[3.325357] (-) TimerEvent: {}
+[3.426649] (-) TimerEvent: {}
+[3.527983] (-) TimerEvent: {}
+[3.615107] (extended_kalman_filter) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.13")  \n'}
+[3.628177] (-) TimerEvent: {}
+[3.690992] (extended_kalman_filter) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") \n'}
+[3.728536] (-) TimerEvent: {}
+[3.743979] (extended_kalman_filter) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[3.828916] (-) TimerEvent: {}
+[3.930450] (-) TimerEvent: {}
+[3.991475] (extended_kalman_filter) StdoutLine: {'line': b'-- Found rclpy: 7.1.11 (/opt/ros/jazzy/share/rclpy/cmake)\n'}
+[3.998460] (extended_kalman_filter) StdoutLine: {'line': b'-- Found std_msgs: 5.3.7 (/opt/ros/jazzy/share/std_msgs/cmake)\n'}
+[4.030789] (-) TimerEvent: {}
+[4.063666] (extended_kalman_filter) StdoutLine: {'line': b'-- Found nav_msgs: 5.3.7 (/opt/ros/jazzy/share/nav_msgs/cmake)\n'}
+[4.131315] (-) TimerEvent: {}
+[4.203767] (extended_kalman_filter) StdoutLine: {'line': b'-- Found sensor_msgs: 5.3.7 (/opt/ros/jazzy/share/sensor_msgs/cmake)\n'}
+[4.231950] (-) TimerEvent: {}
+[4.277369] (extended_kalman_filter) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.17.5 (/opt/ros/jazzy/share/ament_lint_auto/cmake)\n'}
+[4.332478] (-) TimerEvent: {}
+[4.433631] (-) TimerEvent: {}
+[4.534470] (extended_kalman_filter) StdoutLine: {'line': b"-- Added test 'flake8' to check Python code syntax and style conventions\n"}
+[4.535506] (-) TimerEvent: {}
+[4.535989] (extended_kalman_filter) StdoutLine: {'line': b"-- Configured 'flake8' exclude dirs and/or files: \n"}
+[4.543895] (extended_kalman_filter) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[4.548416] (extended_kalman_filter) StdoutLine: {'line': b"-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257\n"}
+[4.557072] (extended_kalman_filter) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[4.564071] (extended_kalman_filter) StdoutLine: {'line': b'-- Configuring done (4.4s)\n'}
+[4.587484] (extended_kalman_filter) StdoutLine: {'line': b'-- Generating done (0.0s)\n'}
+[4.597442] (extended_kalman_filter) StdoutLine: {'line': b'-- Build files have been written to: /home/ubuntu/ros2_ws/src/kalman_filter_ws/build/extended_kalman_filter\n'}
+[4.618920] (extended_kalman_filter) CommandEnded: {'returncode': 0}
+[4.621027] (extended_kalman_filter) JobProgress: {'identifier': 'extended_kalman_filter', 'progress': 'build'}
+[4.621135] (extended_kalman_filter) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/ubuntu/ros2_ws/src/kalman_filter_ws/build/extended_kalman_filter', '--', '-j8', '-l8'], 'cwd': '/home/ubuntu/ros2_ws/src/kalman_filter_ws/build/extended_kalman_filter', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'ubuntu', 'SSH_CLIENT': '192.168.0.12 40174 22', 'LC_TIME': 'C.UTF-8', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/ubuntu', 'OLDPWD': '/home/ubuntu/ros2_ws/src/kalman_filter_ws/src', 'SSH_TTY': '/dev/pts/0', 'ROS_PYTHON_VERSION': '3', 'LC_MONETARY': 'C.UTF-8', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLCON_PREFIX_PATH': '/home/ubuntu/microros_ws/install', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'ubuntu', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '4', 'PATH': '/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'VK_ICD_FILENAMES': '/usr/share/vulkan/icd.d/adrenovk.json', 'LC_ADDRESS': 'C.UTF-8', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': 'localhost:10.0', 'LANG': 'C.UTF-8', 'LC_TELEPHONE': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'LC_NAME': 'C.UTF-8', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'LC_MEASUREMENT': 'C.UTF-8', 'LC_IDENTIFICATION': 'C.UTF-8', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/ubuntu/ros2_ws/src/kalman_filter_ws/build/extended_kalman_filter', 'QT_QPA_PLATFORM': 'wayland', 'SSH_CONNECTION': '192.168.0.12 40174 192.168.0.14 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'LC_NUMERIC': 'C.UTF-8', 'LC_PAPER': 'C.UTF-8', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[4.636143] (-) TimerEvent: {}
+[4.716420] (extended_kalman_filter) CommandEnded: {'returncode': 0}
+[4.722013] (extended_kalman_filter) JobProgress: {'identifier': 'extended_kalman_filter', 'progress': 'install'}
+[4.736667] (-) TimerEvent: {}
+[4.745278] (extended_kalman_filter) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/ubuntu/ros2_ws/src/kalman_filter_ws/build/extended_kalman_filter'], 'cwd': '/home/ubuntu/ros2_ws/src/kalman_filter_ws/build/extended_kalman_filter', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'ubuntu', 'SSH_CLIENT': '192.168.0.12 40174 22', 'LC_TIME': 'C.UTF-8', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/ubuntu', 'OLDPWD': '/home/ubuntu/ros2_ws/src/kalman_filter_ws/src', 'SSH_TTY': '/dev/pts/0', 'ROS_PYTHON_VERSION': '3', 'LC_MONETARY': 'C.UTF-8', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLCON_PREFIX_PATH': '/home/ubuntu/microros_ws/install', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'ubuntu', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '4', 'PATH': '/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'VK_ICD_FILENAMES': '/usr/share/vulkan/icd.d/adrenovk.json', 'LC_ADDRESS': 'C.UTF-8', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': 'localhost:10.0', 'LANG': 'C.UTF-8', 'LC_TELEPHONE': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'LC_NAME': 'C.UTF-8', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'LC_MEASUREMENT': 'C.UTF-8', 'LC_IDENTIFICATION': 'C.UTF-8', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/ubuntu/ros2_ws/src/kalman_filter_ws/build/extended_kalman_filter', 'QT_QPA_PLATFORM': 'wayland', 'SSH_CONNECTION': '192.168.0.12 40174 192.168.0.14 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'LC_NUMERIC': 'C.UTF-8', 'LC_PAPER': 'C.UTF-8', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/home/ubuntu/microros_ws/install/micro_ros_agent:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[4.759395] (extended_kalman_filter) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[4.760967] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter//launch\n'}
+[4.762034] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter//launch/launcher.launch.py\n'}
+[4.763082] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter//src\n'}
+[4.765523] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter//scripts\n'}
+[4.766678] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter//scripts/node_extra.py\n'}
+[4.768280] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter//scripts/node_odometry.py\n'}
+[4.770248] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter//scripts/closed_loop_ctrl.py\n'}
+[4.772017] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter//scripts/error.py\n'}
+[4.775527] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/lib/extended_kalman_filter/node_extra.py\n'}
+[4.777809] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/lib/extended_kalman_filter/error.py\n'}
+[4.779651] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/lib/extended_kalman_filter/node_odometry.py\n'}
+[4.781717] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/lib/extended_kalman_filter/closed_loop_ctrl.py\n'}
+[4.783134] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/ament_index/resource_index/package_run_dependencies/extended_kalman_filter\n'}
+[4.784483] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/ament_index/resource_index/parent_prefix_path/extended_kalman_filter\n'}
+[4.785618] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/environment/ament_prefix_path.sh\n'}
+[4.787109] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/environment/ament_prefix_path.dsv\n'}
+[4.788495] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/environment/path.sh\n'}
+[4.791218] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/environment/path.dsv\n'}
+[4.793000] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/local_setup.bash\n'}
+[4.794551] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/local_setup.sh\n'}
+[4.798125] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/local_setup.zsh\n'}
+[4.799727] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/local_setup.dsv\n'}
+[4.802275] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/package.dsv\n'}
+[4.803616] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/ament_index/resource_index/packages/extended_kalman_filter\n'}
+[4.805046] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/cmake/extended_kalman_filterConfig.cmake\n'}
+[4.807079] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/cmake/extended_kalman_filterConfig-version.cmake\n'}
+[4.808513] (extended_kalman_filter) StdoutLine: {'line': b'-- Installing: /home/ubuntu/ros2_ws/src/kalman_filter_ws/install/extended_kalman_filter/share/extended_kalman_filter/package.xml\n'}
+[4.809989] (extended_kalman_filter) CommandEnded: {'returncode': 0}
+[4.844181] (-) TimerEvent: {}
+[4.946943] (-) TimerEvent: {}
+[4.955780] (extended_kalman_filter) JobEnded: {'identifier': 'extended_kalman_filter', 'rc': 0}
+[4.959359] (-) EventReactorShutdown: {}

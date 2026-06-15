@@ -1,0 +1,22 @@
+-- Install configuration: ""
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader//scripts
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader//scripts/varianza_imu.py
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader//scripts/MPU6050.py
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader//src
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/lib/MPU6050_reader/MPU6050.py
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/lib/MPU6050_reader/varianza_imu.py
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/ament_index/resource_index/package_run_dependencies/MPU6050_reader
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/ament_index/resource_index/parent_prefix_path/MPU6050_reader
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/environment/ament_prefix_path.sh
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/environment/path.sh
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/environment/path.dsv
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/local_setup.bash
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/local_setup.sh
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/local_setup.zsh
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/local_setup.dsv
+-- Installing: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/package.dsv
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/ament_index/resource_index/packages/MPU6050_reader
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/cmake/MPU6050_readerConfig.cmake
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/cmake/MPU6050_readerConfig-version.cmake
+-- Up-to-date: /home/ubuntu/ros2_ws/src/MPU6050/install/MPU6050_reader/share/MPU6050_reader/package.xml
